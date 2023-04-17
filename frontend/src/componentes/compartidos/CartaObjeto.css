@@ -1,0 +1,20 @@
+
+.card-titulo {
+    padding-left: 7px;
+    height: 27px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.card-imagen {
+    height: 240px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-imagen img {
+    border: none;
+}

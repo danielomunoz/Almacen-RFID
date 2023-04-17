@@ -1,0 +1,49 @@
+
+.container-fluid {
+    max-width: 1000px;
+}
+
+nav {
+    height: 65px;
+    position: sticky;
+}
+
+.display-on-small-devices {
+    display: none;
+}
+
+.navbar-buttons-container {
+    width: 310px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.avatar button{
+    margin-left: 10px;
+}
+
+@media only screen and (max-width: 991px) {
+    nav {
+        height: auto;
+    }
+    .navbar-buttons-container {
+        padding-top: 10px;
+        padding-bottom: 9px;
+        margin: 0 auto;
+    }
+}
+
+@media only screen and (max-width: 495px) {
+    .navbar-buttons-container {
+        margin: initial;
+    }
+}
+
+@media only screen and (max-width: 331px) {
+    .display-on-small-devices {
+        display: initial;
+    }
+    .navbar-buttons-container {
+        display: none;
+    }
+}

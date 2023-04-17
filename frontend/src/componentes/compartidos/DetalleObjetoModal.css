@@ -1,0 +1,10 @@
+
+.avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+img {
+    max-height: 250px;
+}

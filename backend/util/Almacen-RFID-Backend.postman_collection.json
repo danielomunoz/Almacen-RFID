@@ -1,0 +1,666 @@
+{
+	"info": {
+		"_postman_id": "ac3cb6b7-fde6-4005-9008-7ad052fe89ed",
+		"name": "Almacen-RFID-Backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4731723"
+	},
+	"item": [
+		{
+			"name": "Persona",
+			"item": [
+				{
+					"name": "All Persona",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:8000/api/persona",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"persona"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Persona 1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"a18e32e6-db09-4324-8189-3781d27a1b8c\",\r\n    \"nombre\": \"Danilo1\",\r\n    \"email\": \"danilo1@danilo.com\",\r\n    \"movil\": \"666555444\",\r\n    \"dni\": \"45555522L\",\r\n    \"codigo_rfid\": \"76464764674767\",\r\n    \"imagen\": \"https://www.images.com/danilo1\",\r\n    \"rol\": \"profesor\",\r\n    \"usuario\": \"danilo1\",\r\n    \"password\": \"danilo1\",\r\n    \"estado\": \"alta\",\r\n    \"token_sesion\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/persona",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"persona"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Persona 2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"962a447f-17d6-4bb6-98a9-3c0b1fc407b8\",\r\n    \"nombre\": \"Danilo2\",\r\n    \"email\": \"danilo2@danilo.com\",\r\n    \"movil\": \"666555444\",\r\n    \"dni\": \"45555523L\",\r\n    \"codigo_rfid\": \"76464764674768\",\r\n    \"imagen\": \"https://www.images.com/danilo2\",\r\n    \"rol\": \"alumno\",\r\n    \"usuario\": \"danilo2\",\r\n    \"password\": \"danilo2\",\r\n    \"estado\": \"alta\",\r\n    \"token_sesion\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/persona",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"persona"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Persona 3",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"166f05e0-935f-4714-9b21-b241c3b722f0\",\r\n    \"nombre\": \"Danilo3\",\r\n    \"email\": \"danilo3@danilo.com\",\r\n    \"movil\": \"666555444\",\r\n    \"dni\": \"45555524L\",\r\n    \"codigo_rfid\": \"76464764674769\",\r\n    \"imagen\": \"https://www.images.com/danilo3\",\r\n    \"rol\": \"alumno\",\r\n    \"usuario\": \"danilo3\",\r\n    \"password\": \"danilo3\",\r\n    \"estado\": \"alta\",\r\n    \"token_sesion\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/persona",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"persona"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Persona By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:8000/api/persona/a18e32e6-db09-4324-8189-3781d27a1b8c",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"persona",
+								"a18e32e6-db09-4324-8189-3781d27a1b8c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Persona By ID",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"danilo1@danilo.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/persona/a18e32e6-db09-4324-8189-3781d27a1b8c",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"persona",
+								"a18e32e6-db09-4324-8189-3781d27a1b8c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Persona By ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:8000/api/persona/73cbacb2-3a82-40d3-89a1-a6532dcb4bd2",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"persona",
+								"73cbacb2-3a82-40d3-89a1-a6532dcb4bd2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Objeto",
+			"item": [
+				{
+					"name": "All Objeto",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:8000/api/objeto",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"objeto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Objeto 1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"6ddab13b-bb69-456b-8095-3e3e0e00029f\",\r\n    \"nombre\": \"Objeto 1\",\r\n    \"descripcion\": \"Descripción del objeto 1\",\r\n    \"familia\": \"\",\r\n    \"categoria\": \"\",\r\n    \"subcategoria\": \"\",\r\n    \"numero_serie\": \"1\",\r\n    \"estado_en_almacen\": \"en deposito\",\r\n    \"propietario\": \"a18e32e6-db09-4324-8189-3781d27a1b8c\",\r\n    \"localizacion\": \"zona1\",\r\n    \"codigo_rfid\": \"1\",\r\n    \"imagen\": \"\",\r\n    \"estado_objeto\": \"nuevo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/objeto",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"objeto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Objeto 2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"d8ef6526-0371-4fb1-9728-9aa9b7f6e5c4\",\r\n    \"nombre\": \"Objeto 2\",\r\n    \"descripcion\": \"Descripción del objeto 2\",\r\n    \"familia\": \"\",\r\n    \"categoria\": \"\",\r\n    \"subcategoria\": \"\",\r\n    \"numero_serie\": \"2\",\r\n    \"estado_en_almacen\": \"en deposito\",\r\n    \"propietario\": \"a18e32e6-db09-4324-8189-3781d27a1b8c\",\r\n    \"localizacion\": \"zona1\",\r\n    \"codigo_rfid\": \"2\",\r\n    \"imagen\": \"\",\r\n    \"estado_objeto\": \"nuevo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/objeto",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"objeto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Objeto 3",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"b90f22d7-fab1-45bb-8a64-38a5edd7cd85\",\r\n    \"nombre\": \"Objeto 3\",\r\n    \"descripcion\": \"Descripción del objeto 3\",\r\n    \"familia\": \"\",\r\n    \"categoria\": \"\",\r\n    \"subcategoria\": \"\",\r\n    \"numero_serie\": \"3\",\r\n    \"estado_en_almacen\": \"en deposito\",\r\n    \"propietario\": \"a18e32e6-db09-4324-8189-3781d27a1b8c\",\r\n    \"localizacion\": \"zona1\",\r\n    \"codigo_rfid\": \"3\",\r\n    \"imagen\": \"\",\r\n    \"estado_objeto\": \"nuevo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/objeto",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"objeto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Objeto By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:8000/api/objeto/6ddab13b-bb69-456b-8095-3e3e0e00029f",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"objeto",
+								"6ddab13b-bb69-456b-8095-3e3e0e00029f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Objeto By ID",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"categoria\": \"herramientas\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/objeto/6ddab13b-bb69-456b-8095-3e3e0e00029f",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"objeto",
+								"6ddab13b-bb69-456b-8095-3e3e0e00029f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Objeto By ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:8000/api/objeto/b90f22d7-fab1-45bb-8a64-38a5edd7cd85",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"objeto",
+								"b90f22d7-fab1-45bb-8a64-38a5edd7cd85"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Detector",
+			"item": [
+				{
+					"name": "All Detector",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:8000/api/detector",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"detector"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Detector 1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"70f5436d-ab30-4e0b-9bf3-ab65cb5e13c4\",\r\n    \"descripcion\": \"Detector 1\",\r\n    \"localizacion\": \"zona1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/detector",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"detector"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Detector By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:8000/api/detector/70f5436d-ab30-4e0b-9bf3-ab65cb5e13c4",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"detector",
+								"70f5436d-ab30-4e0b-9bf3-ab65cb5e13c4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Detector By ID",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"descripcion\": \"Detector 1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/detector/70f5436d-ab30-4e0b-9bf3-ab65cb5e13c4",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"detector",
+								"70f5436d-ab30-4e0b-9bf3-ab65cb5e13c4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Detector By ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:8000/api/detector/70f5436d-ab30-4e0b-9bf3-ab65cb5e13c4",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"detector",
+								"70f5436d-ab30-4e0b-9bf3-ab65cb5e13c4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Accion",
+			"item": [
+				{
+					"name": "All Accion",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:8000/api/accion",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"accion"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Accion 1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"ae29b30f-0260-41de-9767-ea8d82a16c13\",\r\n    \"tipo\": \"ingreso\",\r\n    \"persona\": \"a18e32e6-db09-4324-8189-3781d27a1b8c\",\r\n    \"objeto\": \"6ddab13b-bb69-456b-8095-3e3e0e00029f\",\r\n    \"detector\": \"70f5436d-ab30-4e0b-9bf3-ab65cb5e13c4\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/accion",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"accion"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Accion 2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"5f910cca-1777-4efa-a257-b548becc6c5d\",\r\n    \"tipo\": \"salida\",\r\n    \"persona\": \"a18e32e6-db09-4324-8189-3781d27a1b8c\",\r\n    \"objeto\": \"6ddab13b-bb69-456b-8095-3e3e0e00029f\",\r\n    \"detector\": \"70f5436d-ab30-4e0b-9bf3-ab65cb5e13c4\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/accion",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"accion"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Accion By ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"5f910cca-1777-4efa-a257-b548becc6c5d\",\r\n    \"tipo\": \"salida\",\r\n    \"persona\": \"a18e32e6-db09-4324-8189-3781d27a1b8c\",\r\n    \"objeto\": \"6ddab13b-bb69-456b-8095-3e3e0e00029f\",\r\n    \"detector\": \"70f5436d-ab30-4e0b-9bf3-ab65cb5e13c4\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/accion/ae29b30f-0260-41de-9767-ea8d82a16c13",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"accion",
+								"ae29b30f-0260-41de-9767-ea8d82a16c13"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

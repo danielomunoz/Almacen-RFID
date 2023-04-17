@@ -1,0 +1,10 @@
+
+.avatar {
+    display: flex;
+    flex-direction: column;
+}
+
+.avatar input {
+    margin-top: 18px;
+    max-width: 380px;
+}

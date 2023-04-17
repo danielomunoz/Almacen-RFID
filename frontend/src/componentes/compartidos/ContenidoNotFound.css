@@ -1,0 +1,8 @@
+
+.not-found-content {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    padding-top: 75px;
+}

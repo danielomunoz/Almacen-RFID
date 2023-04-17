@@ -1,0 +1,37 @@
+
+.pagination-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pagination-container button {
+    margin-top: -10px;
+}
+
+.pagination > li > a:focus,
+.pagination > li > a:hover,
+.pagination > li > span:focus,
+.pagination > li > span:hover,
+.pagination > li.active > a  {
+    z-index: 3;
+    color: black;
+    background-color: #ffca2c;
+    border-color: #adb5bd;
+}
+
+.pagination > li > a {
+    color: #adb5bd;
+    border-color: #adb5bd;
+}
+
+.pagination-form {
+    width: 160px;
+}
+
+.page-item {
+    cursor: pointer;
+    -webkit-user-select: none;
+}

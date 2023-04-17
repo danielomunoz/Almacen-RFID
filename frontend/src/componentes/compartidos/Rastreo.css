@@ -1,0 +1,11 @@
+
+.tabla-rastreo-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+tr:hover {
+    background-color: #ffca2c;
+}
