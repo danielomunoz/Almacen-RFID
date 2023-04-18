@@ -24,7 +24,7 @@ function DetalleObjetoModal({objeto}) {
             </div>
             <div className="modal-body">
                 <div className='avatar mb-3'>
-                    <img src={(objeto.imagen != null) ? objeto.imagen : Imagen404} alt="Mi imagen" className="img-thumbnail" />
+                    <img src={(objeto.imagen != undefined && objeto.imagen != null) ? objeto.imagen : Imagen404} alt="Mi imagen" className="img-thumbnail" />
                 </div>
                 <div className='mb-3'>
                     <label htmlFor="exampleFormControlInput1" className="form-label">Nombre</label>
