@@ -45,7 +45,7 @@ class Objeto(models.Model):
 	propietario = models.ForeignKey(Persona, on_delete=models.PROTECT, related_name='propietario', blank=True, null=False)
 	localizacion = models.CharField(max_length=100, blank=True, null=False)
 	fecha_ultima_accion = models.DateTimeField(blank=True, null=True)
-	codigo_rfid = models.CharField(max_length=40, unique=True, blank=True, null=False)
+	codigo_rfid = models.CharField(max_length=40, unique=True, blank=True, null=True)
 	imagen = models.ImageField(upload_to=upload_to, blank=True, null=True)
 	estado_objeto = models.CharField(max_length=20, blank=True, null=False, default='nuevo')
 	fecha_baja = models.DateTimeField(blank=True, null=True)

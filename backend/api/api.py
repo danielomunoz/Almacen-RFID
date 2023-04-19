@@ -278,17 +278,14 @@ class Detector_APIView_Detail(APIView):
 		return Response({"ok": True, "payload": "Detector borrado satisfactoriamente, id: {}".format(pk)})
 
 
-class PersonaPorFecha(APIView):
+class ClonarObjeto(APIView):
 	parser_classes = (MultiPartParser, FormParser)
-	def get(self, request, format=None):
-		fecha_registro = self.request.query_params.get('fecha', None)
-		print(fecha_registro)
-		tupapi = self.request.query_params.get('tupapi', None)
-		print(tupapi)
-		queryset = Persona.objects.filter(fecha_registro__gt=fecha_registro)
-		serializer = PersonaSerializer(queryset, many=True)
-
-		return Response(serializer.data)
+	def post(self, request, pk, format=None):
+		objeto_a_clonar = Objeto.objects.get(id=pk)
+		objeto_a_clonar.pk = None
+		objeto_a_clonar.codigo_rfid = None
+		objeto_a_clonar.save()
+		return Response({"ok": True, "payload": "Objeto con id {} clonado satisfactoriamente".format(pk)})
 
 
 class MisObjetos(APIView, CustomPaginationObjetos):
