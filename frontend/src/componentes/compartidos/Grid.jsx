@@ -34,7 +34,8 @@ function Grid({objetos, userRol, nuevoObjetoRegistrado}) {
           <DetalleObjetoModal objeto={objetos[indiceObjetoPulsado]} />
           <ReplicaObjetoModal objeto={objetos[indiceObjetoPulsado]}
                               nuevoObjetoRegistrado={nuevoObjetoRegistrado} />
-          <ActualizaObjetoModal />
+          <ActualizaObjetoModal objeto={objetos[indiceObjetoPulsado]}
+                                nuevoObjetoRegistrado={nuevoObjetoRegistrado}/>
           <BorraObjetoModal objeto={objetos[indiceObjetoPulsado]}
                             nuevoObjetoRegistrado={nuevoObjetoRegistrado} />
         </>
