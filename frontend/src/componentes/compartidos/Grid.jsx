@@ -3,9 +3,12 @@ import './Grid.css'
 
 import CartaObjeto from './CartaObjeto';
 import DetalleObjetoModal from './DetalleObjetoModal';
+import ReplicaObjetoModal from './ReplicaObjetoModal';
+import ActualizaObjetoModal from './ActualizaObjetoModal';
+import BorraObjetoModal from './BorraObjetoModal';
 
 
-function Grid({objetos}) {
+function Grid({objetos, userRol, nuevoObjetoRegistrado}) {
 
   const [indiceObjetoPulsado, setIndiceObjetoPulsado] = useState(0);
   
@@ -22,12 +25,18 @@ function Grid({objetos}) {
                   objetos.map((objeto, indice) => <CartaObjeto key={objeto + indice}
                                                               objeto={objeto}
                                                               indice={indice}
+                                                              userRol={userRol}
                                                               objetoPulsado={setIndiceObjetoPulsado} />)
                 }
               </div>
             </div>
           </div>
           <DetalleObjetoModal objeto={objetos[indiceObjetoPulsado]} />
+          <ReplicaObjetoModal objeto={objetos[indiceObjetoPulsado]}
+                              nuevoObjetoRegistrado={nuevoObjetoRegistrado} />
+          <ActualizaObjetoModal />
+          <BorraObjetoModal objeto={objetos[indiceObjetoPulsado]}
+                            nuevoObjetoRegistrado={nuevoObjetoRegistrado} />
         </>
       }
     </>

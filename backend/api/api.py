@@ -1,5 +1,7 @@
 import math
 
+from django.utils import timezone
+
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -284,6 +286,7 @@ class ClonarObjeto(APIView):
 		objeto_a_clonar = Objeto.objects.get(id=pk)
 		objeto_a_clonar.pk = None
 		objeto_a_clonar.codigo_rfid = None
+		objeto_a_clonar.fecha_alta = timezone.now()
 		objeto_a_clonar.save()
 		return Response({"ok": True, "payload": "Objeto con id {} clonado satisfactoriamente".format(pk)})
 

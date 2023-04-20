@@ -13,6 +13,7 @@ import ContenidoNotFound from '../compartidos/ContenidoNotFound';
 
 function PrincipalPagina({path, userId}) {
 
+  const [rol, setRol] = useState('alumno');
   const [titulo, setTitulo] = useState('Objetos');
   const [objetos, setObjetos] = useState([]);
   const [acciones, setAcciones] = useState([]);
@@ -21,6 +22,16 @@ function PrincipalPagina({path, userId}) {
   const [totalPaginas, setTotalPaginas] = useState(1);
   const [flagObjetoRegistrado, setFlagObjetoRegistrado] = useState(false);
   const [muestra404, setMuestra404] = useState(false);
+
+  useEffect(() => {
+    axios.get(`http://127.0.0.1:8000/api/persona/${userId}`)
+      .then(res => {
+        setRol(res.data.payload.rol);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   useEffect(() => {
     setMuestra404(false);
@@ -80,7 +91,7 @@ function PrincipalPagina({path, userId}) {
               ?
                 <Rastreo acciones={acciones} />
               :
-                <Grid objetos={objetos} />
+                <Grid objetos={objetos} userRol={rol} nuevoObjetoRegistrado={setFlagObjetoRegistrado} />
           }
           {
             (muestra404) && <ContenidoNotFound />

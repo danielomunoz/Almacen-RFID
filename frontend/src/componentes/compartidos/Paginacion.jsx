@@ -44,7 +44,7 @@ function Paginacion({paginaActual, totalPaginas, cambioPaginaActual}) {
           <a className="page-link" onClick={() => avanzaPagina(paginaActual)}>&rarr;</a>
         </li>
       </ul>
-      <button type="button" className="btn btn-sm btn-outline-warning" onClick={() => irAPagina()}>Ir a página</button>
+      <button type="button" className="btn btn-sm btn-outline-secondary" onClick={() => irAPagina()}>Ir a página</button>
     </nav>
   )
 }
