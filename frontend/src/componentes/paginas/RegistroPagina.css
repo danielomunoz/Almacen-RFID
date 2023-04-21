@@ -1,14 +1,14 @@
 
-.login-container {
+.registro-container {
     max-width: 700px;
     margin: 0 auto;
 }
 
-.login-form-container {
-    margin-top: 40px;
+.registro-form-container {
+    margin-top: 25px;
 }
 
-.login-button {
+.registro-button {
     margin-top: 45px;
     display: flex;
     justify-content: center;

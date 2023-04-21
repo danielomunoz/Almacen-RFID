@@ -13,6 +13,7 @@ from .serializers import *
 
 from .paginations import *
 
+# TODO: Meter comprobaciones de los parámetros por código
 
 class Persona_APIView(APIView):
 	parser_classes = (MultiPartParser, FormParser)
@@ -23,6 +24,7 @@ class Persona_APIView(APIView):
 
 	def post(self, request, format=None):
 		serializer = PersonaSerializer(data=request.data)
+		print(request.data)
 		if not serializer.is_valid():
 			return Response({"ok": False, "errors": serializer.errors})
 		serializer.save()

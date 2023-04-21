@@ -2,13 +2,13 @@ from rest_framework import serializers
 
 from .models import *
 
-
+# TODO: Crear un serializer para Personas que no devuelva el usuario y la contraseña
 
 class PersonaSerializer(serializers.ModelSerializer):
 	imagen = serializers.ImageField(required=False)
 	class Meta:
 		model = Persona
-		fields = ['id', 'nombre', 'email', 'movil', 'dni', 'codigo_rfid', 'imagen', 'fecha_registro', 'rol', 'estado', 'token_sesion']
+		fields = '__all__'
 
 	def validate_rol(self, value):
 		if value not in ['alumno', 'profesor']:
