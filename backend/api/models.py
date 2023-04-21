@@ -17,7 +17,7 @@ class Persona(models.Model):
 	email = models.CharField(max_length=50, unique=True, blank=True, null=False)
 	movil = models.CharField(max_length=15, blank=True, null=False)
 	dni = models.CharField(max_length=15, unique=True, blank=True, null=False)
-	codigo_rfid = models.CharField(max_length=40, unique=True, blank=True, null=False)
+	codigo_rfid = models.CharField(max_length=40, unique=True, blank=True, null=True)
 	imagen = models.ImageField(upload_to=upload_to, blank=True, null=True)
 	fecha_registro = models.DateTimeField(default=timezone.now, blank=True, null=False)
 	rol = models.CharField(max_length=20, blank=True, null=False)

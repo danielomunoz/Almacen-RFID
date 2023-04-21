@@ -90,7 +90,6 @@ function RegistrarObjetoModal({nuevoObjetoRegistrado}) {
                 alert(`Es necesario subir una imagen para el objeto ${i+1}`);
                 return;
             }
-    
             if (bodyObjetos[i].nombre == '') {
                 alert(`El nombre del objeto ${i+1} no puede ser un valor en blanco`);
                 return;
