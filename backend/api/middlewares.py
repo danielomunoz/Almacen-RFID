@@ -10,6 +10,11 @@ class SesionPermisosMiddleware():
             Sesion.objects.get(id=request.headers["Sesion-Token"], fecha_expiracion__gte=timezone.now)
             return True
         except:
+            try:
+                sesion = Sesion.objects.get(id=request.headers["Sesion-Token"])
+                sesion.delete()
+            except:
+                pass
             return False
         
     def rol_profesor_y_alta_confirmada(self, request):

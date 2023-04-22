@@ -1,16 +1,20 @@
 import { useState, useRef } from 'react'
 import './LoginPagina.css'
 
+import axios from 'axios'
+
 import Titulo from '../compartidos/Titulo';
 import Footer from '../compartidos/Footer';
 
 
-function LoginPagina() {
+function LoginPagina({}) {
 
   const [titulo, setTitulo] = useState('Login');
 
   const user = useRef(null);
   const password = useRef(null);
+
+  const formRef = useRef(null);
 
   const doLogin = () => {
     if (user.current.value == ''){
@@ -21,6 +25,28 @@ function LoginPagina() {
         alert(`Por favor, introduzca su contraseña para loguearse en la aplicación`);
         return;
     }
+
+    axios.post("http://127.0.0.1:8000/api/login", {
+        usuario: user.current.value,
+        password: password.current.value,
+    }, {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        })
+            .then(res => {
+                if (res.data.ok){
+                    localStorage.setItem('sesion_token', res.data.token);
+                    formRef.current.reset();
+                    location.reload();
+                } else {
+                    console.log(res.data);
+                    alert('El nuevo usuario no pudo ser logueado');
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            });
   }
   
   return (
@@ -28,7 +54,7 @@ function LoginPagina() {
         <div className='login-container'>
             <Titulo titulo={titulo} login={true} />
             <div className='login-form-container'>
-                <form>
+                <form ref={formRef}>
                     <div className='mb-3'>
                         <label htmlFor="exampleFormControlInput1" className="form-label">Introduzca email o usuario</label>
                         <input type="text" className="form-control" autoComplete="off" ref={user} />

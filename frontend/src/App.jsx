@@ -8,8 +8,6 @@ import RegistroPagina from './componentes/paginas/RegistroPagina';
 
 function App() {
 
-  const [estoyAutenticado, setEstoyAutenticado] = useState(true);
-  const [userId, setUserId] = useState('a18e32e6-db09-4324-8189-3781d27a1b8c');
   const location = useLocation();
   // const query = useLocation().search;
   // console.log(location.pathname);
@@ -18,17 +16,17 @@ function App() {
   return (
     <>
       {
-        estoyAutenticado
+        (localStorage.getItem("sesion_token") !== null)
           ?
             <Routes>
-              <Route path="/objetos" element={<PrincipalPagina path={location.pathname} autenticado={setEstoyAutenticado} userId={userId} />} />
-              <Route path="/rastreo" element={<PrincipalPagina path={location.pathname} autenticado={setEstoyAutenticado} userId={userId} />} />
-              <Route path="/mis-objetos" element={<PrincipalPagina path={location.pathname} autenticado={setEstoyAutenticado} userId={userId} />} />
+              <Route path="/objetos" element={<PrincipalPagina path={location.pathname} />} />
+              <Route path="/rastreo" element={<PrincipalPagina path={location.pathname} />} />
+              <Route path="/mis-objetos" element={<PrincipalPagina path={location.pathname} />} />
               <Route path="*" element={<Navigate to="/objetos" />} />
             </Routes>
           :
             <Routes>
-              <Route path="/login" element={<LoginPagina autenticado={setEstoyAutenticado} />} />
+              <Route path="/login" element={<LoginPagina />} />
               <Route path="/registro" element={<RegistroPagina />} />
               <Route path="*" element={<Navigate to="/login" />} />
             </Routes>

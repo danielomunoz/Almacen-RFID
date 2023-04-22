@@ -11,7 +11,7 @@ import Paginacion from '../compartidos/Paginacion';
 import ContenidoNotFound from '../compartidos/ContenidoNotFound';
 
 
-function PrincipalPagina({path, userId}) {
+function PrincipalPagina({path}) {
 
   const [rol, setRol] = useState('alumno');
   const [titulo, setTitulo] = useState('Objetos');
@@ -24,13 +24,20 @@ function PrincipalPagina({path, userId}) {
   const [muestra404, setMuestra404] = useState(false);
 
   useEffect(() => {
-    axios.get(`http://127.0.0.1:8000/api/persona/${userId}`)
+    axios.get(`http://127.0.0.1:8000/api/sesion/${localStorage.getItem("sesion_token")}`)
       .then(res => {
-        setRol(res.data.payload.rol);
+        let userId = res.data.payload.persona.id;
+        axios.get(`http://127.0.0.1:8000/api/persona/${userId}`)
+          .then(res => {
+            setRol(res.data.payload.rol);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
-      });
+      })
   }, []);
 
   useEffect(() => {
@@ -66,17 +73,24 @@ function PrincipalPagina({path, userId}) {
     }
     if (path === '/mis-objetos') {
       setTitulo('Mis objetos');
-      axios.get(`http://127.0.0.1:8000/api/misObjetos/${userId}?p=${paginaActual}` + filtros)
+      axios.get(`http://127.0.0.1:8000/api/sesion/${localStorage.getItem("sesion_token")}`)
       .then(res => {
-        setTotalPaginas(res.data.total_paginas)
-        setObjetos(res.data.payload);
-        if (res.data.total_objetos === 0) setMuestra404(true);  
+        let userId = res.data.payload.persona.id;
+        axios.get(`http://127.0.0.1:8000/api/misObjetos/${userId}?p=${paginaActual}` + filtros)
+          .then(res => {
+            setTotalPaginas(res.data.total_paginas)
+            setObjetos(res.data.payload);
+            if (res.data.total_objetos === 0) setMuestra404(true);  
+          })
+          .catch((err) => {
+            console.log(err);
+            setObjetos([]);
+            setMuestra404(true);
+          });
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
-        setObjetos([]);
-        setMuestra404(true);
-      });
+      })
     }
   }, [filtros, paginaActual, flagObjetoRegistrado]);
   
@@ -84,7 +98,7 @@ function PrincipalPagina({path, userId}) {
     <>
       <div className='main-container'>
         <div className='main-page-main-container'>
-          <Navbar activeLink={path} actualizaFiltros={setFiltros} nuevoObjetoRegistrado={setFlagObjetoRegistrado} userId={userId} />
+          <Navbar activeLink={path} actualizaFiltros={setFiltros} nuevoObjetoRegistrado={setFlagObjetoRegistrado} />
           <Titulo titulo={titulo} />
           {
             path === '/rastreo'

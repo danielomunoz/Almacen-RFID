@@ -425,6 +425,7 @@ class Login(APIView):
 		try:
 			request.data._mutable = True
 			persona = Persona.objects.get(usuario=request.data["usuario"], password=request.data["password"])
+			if (persona.alta_confirmada != True): return Response({"ok": False, "errors": "Una persona con rol de Profesor debe dar de alta tu cuenta antes de poder loguearte en la aplicación"})
 			request.data["persona"] = persona.id
 			request.data["usuario"] = None
 			request.data["password"] = None
@@ -437,6 +438,6 @@ class Login(APIView):
 			if not serializer.is_valid():
 				return Response({"ok": False, "errors": serializer.errors})
 			serializer.save()
-			return Response({"ok": True, "token": serializer.data["id"]})
+			return Response({"ok": True, "token": serializer.data["id"], "user_id": serializer.data["persona"]})
 		except Persona.DoesNotExist:
 			return Response({"ok": False, "errors": "No se encontró una persona con ese usuario o esa contraseña en base de datos"})

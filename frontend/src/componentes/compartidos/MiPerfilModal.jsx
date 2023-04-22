@@ -15,8 +15,6 @@ function parseStringToDate(string) {
 }
 
 
-
-
 function MiPerfilModal({userId}) {
 
     const [user, setUser] = useState({})
@@ -26,13 +24,20 @@ function MiPerfilModal({userId}) {
 
     useEffect(() => {
         setReload(false);
-        axios.get(`http://127.0.0.1:8000/api/persona/${userId}`)
+        axios.get(`http://127.0.0.1:8000/api/sesion/${localStorage.getItem("sesion_token")}`)
             .then(res => {
-                setUser(res.data.payload);
+                let userId = res.data.payload.persona.id;
+                axios.get(`http://127.0.0.1:8000/api/persona/${userId}`)
+                    .then(res => {
+                        setUser(res.data.payload);
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    });
             })
             .catch(err => {
                 console.log(err);
-            });
+            })
     }, [reload])
 
     const updateImagen = () => {
@@ -45,22 +50,29 @@ function MiPerfilModal({userId}) {
             imagen: imagen.current.files[0]
         };
 
-        axios.put(`http://127.0.0.1:8000/api/persona/${userId}`, body, {
-            headers: {
-                "Content-Type": "multipart/form-data"
-            }
-        })
+        axios.get(`http://127.0.0.1:8000/api/sesion/${localStorage.getItem("sesion_token")}`)
             .then(res => {
-                if (res.data.ok){
-                    setReload(true);
-                } else {
-                    alert('La imagen no pudo ser actualizada');
-                }
+                let userId = res.data.payload.persona.id;
+                axios.put(`http://127.0.0.1:8000/api/persona/${userId}`, body, {
+                    headers: {
+                        "Content-Type": "multipart/form-data"
+                    }
+                })
+                    .then(res => {
+                        if (res.data.ok){
+                            setReload(true);
+                        } else {
+                            alert('La imagen no pudo ser actualizada');
+                        }
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        alert(err);
+                    });
             })
             .catch(err => {
                 console.log(err);
-                alert(err);
-            });
+            })
     }
   
   return (
