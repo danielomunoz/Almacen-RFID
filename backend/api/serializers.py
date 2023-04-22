@@ -2,7 +2,6 @@ from rest_framework import serializers
 
 from .models import *
 
-# TODO: Crear un serializer para Personas que no devuelva el usuario y la contraseña
 
 class PersonaSerializer(serializers.ModelSerializer):
 	imagen = serializers.ImageField(required=False)
@@ -25,7 +24,7 @@ class PersonaGetSerializer(serializers.ModelSerializer):
 	imagen = serializers.ImageField(required=False)
 	class Meta:
 		model = Persona
-		fields = ['nombre', 'email', 'movil', 'dni', 'codigo_rfid', 'imagen', 'fecha_registro', 'rol', 'estado']
+		fields = ['id', 'nombre', 'email', 'movil', 'dni', 'codigo_rfid', 'imagen', 'fecha_registro', 'rol', 'estado']
 
 
 class ObjetoSerializer(serializers.ModelSerializer):

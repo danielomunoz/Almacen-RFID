@@ -14,7 +14,9 @@ from .serializers import *
 
 from .paginations import *
 
-# TODO: Meter comprobaciones de los parámetros por código
+from .middlewares import *
+
+# TODO: Meter comprobaciones de los parámetros por código para customizar las respuestas de error
 
 class Persona_APIView(APIView, CustomPaginationObjetos):
 	parser_classes = (MultiPartParser, FormParser)
@@ -250,9 +252,11 @@ class Accion_APIView_Detail(APIView):
 		return Response({"ok": True, "payload": "Accion borrada satisfactoriamente, id: {}".format(pk)})
 
 
-class Detector_APIView(APIView):
+class Detector_APIView(APIView, SesionPermisosMiddleware):
 	parser_classes = (MultiPartParser, FormParser)
 	def get(self, request, format=None, *args, **kwargs):
+		# if not self.sesion_valida_y_rol_profesor_y_alta_confirmada(request):
+		# 	return Response({"ok": False, "errors": "Necesita tener su sesión iniciada, rol de profesor y estar dado de alta en la aplicación para realizar esta acción"})
 		detector = Detector.objects.all()
 		serializer = DetectorSerializer(detector, many=True)
 		return Response({"ok": True, "payload": serializer.data})
