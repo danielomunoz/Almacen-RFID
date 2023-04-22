@@ -1,4 +1,5 @@
 import math
+import hashlib
 
 from django.utils import timezone
 
@@ -34,6 +35,8 @@ class Persona_APIView(APIView, CustomPaginationObjetos):
 		return self.get_paginated_response({"ok": True, "payload": serializer.data, "tamano_pagina": self.get_page_size(request), "total_paginas": (math.ceil(self.page.paginator.count / self.get_page_size(request))), "total_objetos": self.page.paginator.count}, request)
 
 	def post(self, request, format=None):
+		request.data._mutable = True
+		request.data["password"] = hashlib.sha256(str(request.data["password"]).encode("utf-8")).hexdigest()
 		serializer = PersonaSerializer(data=request.data)
 		if not serializer.is_valid():
 			return Response({"ok": False, "errors": serializer.errors})

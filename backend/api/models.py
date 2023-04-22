@@ -22,10 +22,9 @@ class Persona(models.Model):
 	fecha_registro = models.DateTimeField(default=timezone.now, blank=True, null=False)
 	rol = models.CharField(max_length=20, blank=True, null=False)
 	usuario = models.CharField(max_length=50, unique=True, blank=True, null=False)
-	password = models.CharField(max_length=50, blank=True, null=False)
+	password = models.CharField(max_length=100, blank=True, null=False)
 	estado = models.CharField(max_length=20, blank=True, null=True)
 	fecha_baja = models.DateTimeField(blank=True, null=True)
-	token_sesion = models.CharField(max_length=200, blank=True, null=True)
 	alta_confirmada = models.BooleanField(default=False, blank=True, null=False)
 
 	def __str__(self):
