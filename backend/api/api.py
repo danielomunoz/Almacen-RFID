@@ -255,8 +255,8 @@ class Accion_APIView_Detail(APIView):
 class Detector_APIView(APIView, SesionPermisosMiddleware):
 	parser_classes = (MultiPartParser, FormParser)
 	def get(self, request, format=None, *args, **kwargs):
-		# if not self.sesion_valida_y_rol_profesor_y_alta_confirmada(request):
-		# 	return Response({"ok": False, "errors": "Necesita tener su sesión iniciada, rol de profesor y estar dado de alta en la aplicación para realizar esta acción"})
+		# if not self.sesion_valida(request): return Response({"ok": False, "errors": "Lo sentimos. No puede realizar esta acción porque su sesión ha expirado"})
+		# if not self.rol_profesor_y_alta_confirmada(request): return Response({"ok": False, "errors": "Necesita tener su sesión iniciada, rol de profesor y estar dado de alta en la aplicación para realizar esta acción"})
 		detector = Detector.objects.all()
 		serializer = DetectorSerializer(detector, many=True)
 		return Response({"ok": True, "payload": serializer.data})
@@ -417,3 +417,26 @@ class Sesion_APIView_Detail(APIView):
 			return Response({"ok": False, "errors": "No se encontró una sesión con ese ID en base de datos"})
 		sesion.delete()
 		return Response({"ok": True, "payload": "Sesión borrada satisfactoriamente, id: {}".format(pk)})
+
+
+class Login(APIView):
+	parser_classes = (MultiPartParser, FormParser)
+	def post(self, request, format=None):
+		try:
+			request.data._mutable = True
+			persona = Persona.objects.get(usuario=request.data["usuario"], password=request.data["password"])
+			request.data["persona"] = persona.id
+			request.data["usuario"] = None
+			request.data["password"] = None
+			try:
+				sesion = Sesion.objects.get(persona=request.data["persona"])
+				sesion.delete()
+			except Sesion.DoesNotExist:
+				pass
+			serializer = PostSesionSerializer(data=request.data)
+			if not serializer.is_valid():
+				return Response({"ok": False, "errors": serializer.errors})
+			serializer.save()
+			return Response({"ok": True, "token": serializer.data["id"]})
+		except Persona.DoesNotExist:
+			return Response({"ok": False, "errors": "No se encontró una persona con ese usuario o esa contraseña en base de datos"})

@@ -17,4 +17,5 @@ urlpatterns = [
 	path('api/sesion/<str:pk>', Sesion_APIView_Detail.as_view()),
 	path('api/objeto/clonar/<str:pk>', ClonarObjeto.as_view()),
 	path('api/misObjetos/<str:fk>', MisObjetos.as_view()),
+    path('api/login', Login.as_view()),
 ]
