@@ -119,9 +119,9 @@ class Objeto_APIView(APIView, CustomPaginationObjetos):
 			queryset = queryset & Objeto.objects.filter(fecha_ultima_accion__gte=fecha_ultima_accion_desde)
 		if fecha_ultima_accion_hasta is not None:
 			queryset = queryset & Objeto.objects.filter(fecha_ultima_accion__lte=fecha_ultima_accion_hasta)
-		if codigo_rfid is not None and codigo_rfid is not "":
+		if codigo_rfid is not None and codigo_rfid != "":
 			queryset = queryset & Objeto.objects.filter(codigo_rfid__icontains=codigo_rfid)
-		if codigo_rfid is not None and codigo_rfid is "":
+		if codigo_rfid is not None and codigo_rfid == "":
 			queryset = queryset & Objeto.objects.filter(codigo_rfid__isnull=True)
 		if estado_objeto is not None:
 			queryset = queryset & Objeto.objects.filter(estado_objeto=estado_objeto)
@@ -356,9 +356,9 @@ class MisObjetos(APIView, CustomPaginationObjetos):
 			queryset = queryset & Objeto.objects.filter(fecha_ultima_accion__gte=fecha_ultima_accion_desde)
 		if fecha_ultima_accion_hasta is not None:
 			queryset = queryset & Objeto.objects.filter(fecha_ultima_accion__lte=fecha_ultima_accion_hasta)
-		if codigo_rfid is not None and codigo_rfid is not "":
+		if codigo_rfid is not None and codigo_rfid != "":
 			queryset = queryset & Objeto.objects.filter(codigo_rfid__icontains=codigo_rfid)
-		if codigo_rfid is not None and codigo_rfid is "":
+		if codigo_rfid is not None and codigo_rfid == "":
 			queryset = queryset & Objeto.objects.filter(codigo_rfid__isnull=True)
 		if estado_objeto is not None:
 			queryset = queryset & Objeto.objects.filter(estado_objeto=estado_objeto)
@@ -368,3 +368,45 @@ class MisObjetos(APIView, CustomPaginationObjetos):
 		serializer = ObjetoSerializer(queryset, many=True, context={'request':request})
 
 		return self.get_paginated_response({"ok": True, "payload": serializer.data, "tamano_pagina": self.get_page_size(request), "total_paginas": (math.ceil(self.page.paginator.count / self.get_page_size(request))), "total_objetos": self.page.paginator.count}, request)
+
+
+class Sesion_APIView(APIView):
+	parser_classes = (MultiPartParser, FormParser)
+	def get(self, request, format=None, *args, **kwargs):
+		sesion = Sesion.objects.all()
+		serializer = SesionSerializer(sesion, many=True)
+		return Response({"ok": True, "payload": serializer.data})
+
+	def post(self, request, format=None):
+		try:
+			sesion = Sesion.objects.get(persona=request.data["persona"])
+			sesion.delete()
+		except Sesion.DoesNotExist:
+			pass
+		serializer = PostSesionSerializer(data=request.data)
+		if not serializer.is_valid():
+			return Response({"ok": False, "errors": serializer.errors})
+		serializer.save()
+		return Response({"ok": True, "payload": serializer.data})
+
+class Sesion_APIView_Detail(APIView):
+	parser_classes = (MultiPartParser, FormParser)
+	def get_object(self, pk):
+		try:
+			return Sesion.objects.get(id=pk)
+		except Sesion.DoesNotExist:
+			return None
+
+	def get(self, request, pk, format=None):
+		sesion = self.get_object(pk)
+		if sesion == None:
+			return Response({"ok": False, "errors": "No se encontró una sesión con ese ID en base de datos"})
+		serializer = SesionSerializer(sesion)
+		return Response({"ok": True, "payload": serializer.data})
+
+	def delete(self, request, pk, format=None):
+		sesion = self.get_object(pk)
+		if sesion == None:
+			return Response({"ok": False, "errors": "No se encontró una sesión con ese ID en base de datos"})
+		sesion.delete()
+		return Response({"ok": True, "payload": "Sesión borrada satisfactoriamente, id: {}".format(pk)})

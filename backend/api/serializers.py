@@ -123,3 +123,25 @@ class PostAccionSerializer(serializers.ModelSerializer):
 		if value not in ['ingreso', 'salida']:
 			raise serializers.ValidationError('El tipo sólo puede tener como valores: [ingreso, salida]')
 		return value
+	
+
+class SesionSerializer(serializers.ModelSerializer):
+	persona = PersonaGetSerializer(
+				many=False,
+				read_only=True
+			)
+
+	class Meta:
+		model = Sesion
+		fields = '__all__'
+
+
+class PostSesionSerializer(serializers.ModelSerializer):
+	persona = serializers.PrimaryKeyRelatedField(
+				queryset=Persona.objects.all(),
+				required=True
+			)
+
+	class Meta:
+		model = Sesion
+		fields = '__all__'

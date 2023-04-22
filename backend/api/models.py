@@ -75,3 +75,12 @@ class Accion(models.Model):
 
 	def __str__(self):
 		return self.id
+
+
+class Sesion(models.Model):
+	id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True)
+	persona = models.ForeignKey(Persona, on_delete=models.CASCADE, related_name='sesion_persona')
+	fecha_expiracion = models.DateTimeField(default=(timezone.now() + datetime.timedelta(hours=2)), blank=True, null=False)
+
+	def __str__(self):
+		return self.id
