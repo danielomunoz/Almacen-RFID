@@ -23,7 +23,7 @@ class Persona(models.Model):
 	rol = models.CharField(max_length=20, blank=True, null=False)
 	usuario = models.CharField(max_length=50, unique=True, blank=True, null=False)
 	password = models.CharField(max_length=50, blank=True, null=False)
-	estado = models.CharField(max_length=20, blank=True, null=False)
+	estado = models.CharField(max_length=20, blank=True, null=True)
 	fecha_baja = models.DateTimeField(blank=True, null=True)
 	token_sesion = models.CharField(max_length=200, blank=True, null=True)
 	alta_confirmada = models.BooleanField(default=False, blank=True, null=False)

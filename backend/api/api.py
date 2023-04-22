@@ -15,12 +15,23 @@ from .paginations import *
 
 # TODO: Meter comprobaciones de los parámetros por código
 
-class Persona_APIView(APIView):
+class Persona_APIView(APIView, CustomPaginationObjetos):
 	parser_classes = (MultiPartParser, FormParser)
 	def get(self, request, format=None, *args, **kwargs):
+		alta = self.request.query_params.get('alta', None)
+
 		persona = Persona.objects.all()
+
+		if alta is not None and alta.__eq__("true"):
+			persona = persona & Persona.objects.filter(alta_confirmada=True)
+		if alta is not None and alta.__eq__("false"):
+			persona = persona & Persona.objects.filter(alta_confirmada=False)
+
+		persona = persona.order_by('-fecha_registro')
+		persona = self.paginate_queryset(persona, request, view=self)
 		serializer = PersonaGetSerializer(persona, many=True)
-		return Response({"ok": True, "payload": serializer.data})
+
+		return self.get_paginated_response({"ok": True, "payload": serializer.data, "tamano_pagina": self.get_page_size(request), "total_paginas": (math.ceil(self.page.paginator.count / self.get_page_size(request))), "total_objetos": self.page.paginator.count}, request)
 
 	def post(self, request, format=None):
 		serializer = PersonaSerializer(data=request.data)
@@ -108,8 +119,10 @@ class Objeto_APIView(APIView, CustomPaginationObjetos):
 			queryset = queryset & Objeto.objects.filter(fecha_ultima_accion__gte=fecha_ultima_accion_desde)
 		if fecha_ultima_accion_hasta is not None:
 			queryset = queryset & Objeto.objects.filter(fecha_ultima_accion__lte=fecha_ultima_accion_hasta)
-		if codigo_rfid is not None:
+		if codigo_rfid is not None and codigo_rfid is not "":
 			queryset = queryset & Objeto.objects.filter(codigo_rfid__icontains=codigo_rfid)
+		if codigo_rfid is not None and codigo_rfid is "":
+			queryset = queryset & Objeto.objects.filter(codigo_rfid__isnull=True)
 		if estado_objeto is not None:
 			queryset = queryset & Objeto.objects.filter(estado_objeto=estado_objeto)
 
@@ -343,8 +356,10 @@ class MisObjetos(APIView, CustomPaginationObjetos):
 			queryset = queryset & Objeto.objects.filter(fecha_ultima_accion__gte=fecha_ultima_accion_desde)
 		if fecha_ultima_accion_hasta is not None:
 			queryset = queryset & Objeto.objects.filter(fecha_ultima_accion__lte=fecha_ultima_accion_hasta)
-		if codigo_rfid is not None:
+		if codigo_rfid is not None and codigo_rfid is not "":
 			queryset = queryset & Objeto.objects.filter(codigo_rfid__icontains=codigo_rfid)
+		if codigo_rfid is not None and codigo_rfid is "":
+			queryset = queryset & Objeto.objects.filter(codigo_rfid__isnull=True)
 		if estado_objeto is not None:
 			queryset = queryset & Objeto.objects.filter(estado_objeto=estado_objeto)
 
