@@ -8,6 +8,10 @@ nav {
     position: sticky;
 }
 
+nav a {
+    cursor: pointer;
+}
+
 .display-on-small-devices {
     display: none;
 }

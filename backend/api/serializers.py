@@ -21,6 +21,13 @@ class PersonaSerializer(serializers.ModelSerializer):
 		return value
 
 
+class PersonaGetSerializer(serializers.ModelSerializer):
+	imagen = serializers.ImageField(required=False)
+	class Meta:
+		model = Persona
+		fields = ['nombre', 'email', 'movil', 'dni', 'codigo_rfid', 'imagen', 'fecha_registro', 'rol', 'estado']
+
+
 class ObjetoSerializer(serializers.ModelSerializer):
 	imagen = serializers.ImageField(required=False)
 	responsable = PersonaSerializer(

@@ -8,7 +8,7 @@ import RegistroPagina from './componentes/paginas/RegistroPagina';
 
 function App() {
 
-  const [estoyAutenticado, setEstoyAutenticado] = useState(false);
+  const [estoyAutenticado, setEstoyAutenticado] = useState(true);
   const [userId, setUserId] = useState('a18e32e6-db09-4324-8189-3781d27a1b8c');
   const location = useLocation();
   // const query = useLocation().search;

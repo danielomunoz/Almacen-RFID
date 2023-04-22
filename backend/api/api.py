@@ -19,7 +19,7 @@ class Persona_APIView(APIView):
 	parser_classes = (MultiPartParser, FormParser)
 	def get(self, request, format=None, *args, **kwargs):
 		persona = Persona.objects.all()
-		serializer = PersonaSerializer(persona, many=True)
+		serializer = PersonaGetSerializer(persona, many=True)
 		return Response({"ok": True, "payload": serializer.data})
 
 	def post(self, request, format=None):
@@ -41,7 +41,7 @@ class Persona_APIView_Detail(APIView):
 		persona = self.get_object(pk)
 		if persona == None:
 			return Response({"ok": False, "errors": "No se encontró una persona con ese ID en base de datos"})
-		serializer = PersonaSerializer(persona)
+		serializer = PersonaGetSerializer(persona)
 		return Response({"ok": True, "payload": serializer.data})
 
 	def put(self, request, pk, format=None):

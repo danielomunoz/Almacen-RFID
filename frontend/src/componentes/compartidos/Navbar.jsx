@@ -27,23 +27,23 @@ function Navbar({activeLink, actualizaFiltros, nuevoObjetoRegistrado, userId}) {
                         <a className={activeLink === '/rastreo' ? 'nav-link active' : 'nav-link'} href="/rastreo">Rastreo</a>
                     </li>
                     <li className="nav-item dropdown">
-                        <a className="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Mi perfil
                         </a>
                         <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a className="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#miPerfilModal">Información</a></li>
+                            <li><a className="dropdown-item" data-bs-toggle="modal" data-bs-target="#miPerfilModal">Información</a></li>
                             <li><hr className="dropdown-divider" /></li>
                             <li><a className="dropdown-item" href="/mis-objetos">Mis objetos</a></li>
                         </ul>
                     </li>
                     <li className="nav-item display-on-small-devices">
-                        <a className="nav-link" href="" data-bs-toggle="modal" data-bs-target="#filtrosModal">Filtrar</a>
+                        <a className="nav-link" data-bs-toggle="modal" data-bs-target="#filtrosModal">Filtrar</a>
                     </li>
                     <li className="nav-item display-on-small-devices">
-                        <a className="nav-link" href="" data-bs-toggle="modal" data-bs-target="#registroObjetoModal">Registrar objeto</a>
+                        <a className="nav-link" data-bs-toggle="modal" data-bs-target="#registroObjetoModal">Registrar objeto</a>
                     </li>
                     <li className="nav-item display-on-small-devices">
-                        <a className="nav-link" href="" data-bs-toggle="modal" data-bs-target="#logoutModal">Logout</a>
+                        <a className="nav-link" data-bs-toggle="modal" data-bs-target="#logoutModal">Logout</a>
                     </li>
                 </ul>
                 <div className="navbar-buttons-container">
