@@ -26,7 +26,7 @@ function DetallePersonaModal({persona}) {
             </div>
             <div className="modal-body">
                 <div className='avatar mb-3'>
-                    <img src={(persona.imagen != null) ? persona.imagen : Imagen404} alt="Mi imagen" className="img-thumbnail" />
+                    <img src={(persona.imagen != undefined && persona.imagen != null) ? `http://127.0.0.1:8000${persona.imagen}` : Imagen404} alt="Mi imagen" className="img-thumbnail" />
                 </div>
                 <div className='mb-3'>
                     <label htmlFor="exampleFormControlInput1" className="form-label">Nombre</label>

@@ -8,7 +8,7 @@ import RegistrarObjetoModal from './RegistrarObjetoModal'
 import LogoutModal from './LogoutModal'
 
 
-function Navbar({activeLink, actualizaFiltros, nuevoObjetoRegistrado}) {
+function Navbar({activeLink, actualizaFiltros, nuevoObjetoRegistrado, rol}) {
   
   return (
     <>
@@ -26,6 +26,14 @@ function Navbar({activeLink, actualizaFiltros, nuevoObjetoRegistrado}) {
                     <li className="nav-item">
                         <a className={activeLink === '/rastreo' ? 'nav-link active' : 'nav-link'} href="/rastreo">Rastreo</a>
                     </li>
+                    {   
+                        (rol == 'profesor')
+                        &&
+                        <li className="nav-item nav-item-avisos">
+                            <a className={activeLink === '/avisos' ? 'nav-link active' : 'nav-link'} href="/avisos">Avisos</a>
+                            <div className='red-circle'></div>
+                        </li>
+                    }
                     <li className="nav-item dropdown">
                         <a className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Mi perfil

@@ -22,6 +22,7 @@ function App() {
               <Route path="/objetos" element={<PrincipalPagina path={location.pathname} />} />
               <Route path="/rastreo" element={<PrincipalPagina path={location.pathname} />} />
               <Route path="/mis-objetos" element={<PrincipalPagina path={location.pathname} />} />
+              <Route path="/avisos" element={<PrincipalPagina path={location.pathname} />} />
               <Route path="*" element={<Navigate to="/objetos" />} />
             </Routes>
           :

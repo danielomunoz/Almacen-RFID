@@ -9,6 +9,7 @@ import Footer from '../compartidos/Footer';
 import Rastreo from '../compartidos/Rastreo';
 import Paginacion from '../compartidos/Paginacion';
 import ContenidoNotFound from '../compartidos/ContenidoNotFound';
+import Avisos from '../compartidos/Avisos';
 
 
 function PrincipalPagina({path}) {
@@ -92,24 +93,21 @@ function PrincipalPagina({path}) {
         console.log(err);
       })
     }
+    if (path == '/avisos') {
+      setTitulo('Avisos');
+    }
   }, [filtros, paginaActual, flagObjetoRegistrado]);
   
   return (
     <>
       <div className='main-container'>
         <div className='main-page-main-container'>
-          <Navbar activeLink={path} actualizaFiltros={setFiltros} nuevoObjetoRegistrado={setFlagObjetoRegistrado} />
+          <Navbar activeLink={path} actualizaFiltros={setFiltros} nuevoObjetoRegistrado={setFlagObjetoRegistrado} rol={rol} />
           <Titulo titulo={titulo} />
-          {
-            path === '/rastreo'
-              ?
-                <Rastreo acciones={acciones} />
-              :
-                <Grid objetos={objetos} userRol={rol} nuevoObjetoRegistrado={setFlagObjetoRegistrado} />
-          }
-          {
-            (muestra404) && <ContenidoNotFound />
-          }
+          { (path == '/rastreo') && <Rastreo acciones={acciones} /> }
+          { (path == '/objetos' || path == '/mis-objetos') && <Grid objetos={objetos} userRol={rol} nuevoObjetoRegistrado={setFlagObjetoRegistrado} /> }
+          { (path == '/avisos') && <Avisos /> }
+          { (muestra404) && <ContenidoNotFound /> }
         </div>
         <div className='main-page-footer-container'>
           <Paginacion paginaActual={paginaActual} totalPaginas={totalPaginas} cambioPaginaActual={setPaginaActual} />
