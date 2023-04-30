@@ -50,7 +50,7 @@ function PrincipalPagina({path}) {
     clearInterval(serviciosInterval.current);
     serviciosInterval.current = null;
     if (path === '/objetos') {
-      console.log('Trayendo objetos de DB');
+      // console.log('Trayendo objetos de DB');
       setTitulo('Objetos');
       axios.get(`http://127.0.0.1:8000/api/objeto?p=${paginaActual}` + filtros)
       .then(res => {
@@ -64,7 +64,7 @@ function PrincipalPagina({path}) {
         setMuestra404(true);
       });
       serviciosInterval.current = setInterval(() => {
-        console.log('Llamando a intervalo');
+        // console.log('Llamando a intervalo');
         axios.get(`http://127.0.0.1:8000/api/objeto?p=${paginaActual}` + filtros)
           .then(res => {
             setTotalPaginas(res.data.total_paginas)
@@ -92,7 +92,7 @@ function PrincipalPagina({path}) {
         setMuestra404(true);
       });
       serviciosInterval.current = setInterval(() => {
-        console.log('Llamando a intervalo');
+        // console.log('Llamando a intervalo');
         axios.get(`http://127.0.0.1:8000/api/accion?p=${paginaActual}` + filtros)
           .then(res => {
             setTotalPaginas(res.data.total_paginas)
@@ -127,7 +127,7 @@ function PrincipalPagina({path}) {
         console.log(err);
       })
       serviciosInterval.current = setInterval(() => {
-        console.log('Llamando a intervalo');
+        // console.log('Llamando a intervalo');
         axios.get(`http://127.0.0.1:8000/api/sesion/${localStorage.getItem("sesion_token")}`)
           .then(res => {
             let userId = res.data.payload.persona.id;
@@ -162,7 +162,7 @@ function PrincipalPagina({path}) {
         })
         .catch(err => console.log(err));
       serviciosInterval.current = setInterval(() => {
-        console.log('Llamando a intervalo');
+        // console.log('Llamando a intervalo');
         axios.get(`http://127.0.0.1:8000/api/persona?alta=false`)
           .then(res => {
             setPersonasSinRegistrar(res.data.payload);
@@ -179,7 +179,7 @@ function PrincipalPagina({path}) {
   }, [filtros, paginaActual, flagObjetoRegistrado]);
 
   useEffect(() => () => {
-    console.log('Desmontando Página Principal y limpiando intervalo');
+    // console.log('Desmontando Página Principal y limpiando intervalo');
     clearInterval(serviciosInterval.current);
     serviciosInterval.current = null;
   }, [])
@@ -192,7 +192,7 @@ function PrincipalPagina({path}) {
           <Titulo titulo={titulo} />
           { (path == '/rastreo') && <Rastreo acciones={acciones} /> }
           { (path == '/objetos' || path == '/mis-objetos') && <Grid objetos={objetos} userRol={rol} nuevoObjetoRegistrado={setFlagObjetoRegistrado} /> }
-          { (path == '/avisos') && <Avisos personasSinRegistrar={personasSinRegistrar} objetosSinRFID={objetosSinRFID} /> }
+          { (path == '/avisos') && <Avisos personasSinRegistrar={personasSinRegistrar} objetosSinRFID={objetosSinRFID} nuevoObjetoRegistrado={setFlagObjetoRegistrado} /> }
           { (muestra404) && <ContenidoNotFound /> }
         </div>
         <div className='main-page-footer-container'>

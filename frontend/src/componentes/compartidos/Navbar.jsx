@@ -29,7 +29,7 @@ function Navbar({activeLink, actualizaFiltros, nuevoObjetoRegistrado, rol}) {
             })
             .catch(err => console.log(err));
         navbarInterval.current = setInterval(() => {
-            console.log('Llamando a intervalo navbar');
+            // console.log('Llamando a intervalo navbar');
             axios.get(`http://127.0.0.1:8000/api/persona?alta=false`)
               .then(res => {
                 (res.data.payload.length != 0) ? setHayPersonasSinDarDeAlta(true) : setHayPersonasSinDarDeAlta(false);
@@ -45,7 +45,7 @@ function Navbar({activeLink, actualizaFiltros, nuevoObjetoRegistrado, rol}) {
     }, [])
 
     useEffect(() => () => {
-        console.log('Limpiando intervalo navbar');
+        // console.log('Limpiando intervalo navbar');
         clearInterval(navbarInterval.current);
         navbarInterval.current = null;
     }, []);

@@ -13,7 +13,7 @@ function parseStringToDate(string) {
 }
 
 
-function Avisos({personasSinRegistrar, objetosSinRFID}) {
+function Avisos({personasSinRegistrar, objetosSinRFID, nuevoObjetoRegistrado}) {
   
   return (
     <div className="avisos-container">
