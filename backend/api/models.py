@@ -25,7 +25,7 @@ class Persona(models.Model):
 	password = models.CharField(max_length=100, blank=True, null=False)
 	estado = models.CharField(max_length=20, blank=True, null=True)
 	fecha_baja = models.DateTimeField(blank=True, null=True)
-	alta_confirmada = models.BooleanField(default=False, blank=True, null=False)
+	alta_confirmada = models.BooleanField(blank=True, null=False)
 
 	def __str__(self):
 		return self.nombre

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import './PrincipalPagina.css'
 
@@ -23,6 +23,9 @@ function PrincipalPagina({path}) {
   const [totalPaginas, setTotalPaginas] = useState(1);
   const [flagObjetoRegistrado, setFlagObjetoRegistrado] = useState(false);
   const [muestra404, setMuestra404] = useState(false);
+  const [personasSinRegistrar, setPersonasSinRegistrar] = useState([]);
+  const [objetosSinRFID, setObjetosSinRFID] = useState([]);
+  const serviciosInterval = useRef(null);
 
   useEffect(() => {
     axios.get(`http://127.0.0.1:8000/api/sesion/${localStorage.getItem("sesion_token")}`)
@@ -44,7 +47,10 @@ function PrincipalPagina({path}) {
   useEffect(() => {
     setMuestra404(false);
     if (flagObjetoRegistrado === true) setFlagObjetoRegistrado(false);
+    clearInterval(serviciosInterval.current);
+    serviciosInterval.current = null;
     if (path === '/objetos') {
+      console.log('Trayendo objetos de DB');
       setTitulo('Objetos');
       axios.get(`http://127.0.0.1:8000/api/objeto?p=${paginaActual}` + filtros)
       .then(res => {
@@ -57,6 +63,20 @@ function PrincipalPagina({path}) {
         setObjetos([]);
         setMuestra404(true);
       });
+      serviciosInterval.current = setInterval(() => {
+        console.log('Llamando a intervalo');
+        axios.get(`http://127.0.0.1:8000/api/objeto?p=${paginaActual}` + filtros)
+          .then(res => {
+            setTotalPaginas(res.data.total_paginas)
+            setObjetos(res.data.payload);
+            if (res.data.total_objetos === 0) setMuestra404(true);   
+          })
+          .catch((err) => {
+            console.log(err);
+            setObjetos([]);
+            setMuestra404(true);
+          });
+      }, 5000);
     }
     if (path === '/rastreo') {
       setTitulo('Rastreo');
@@ -71,6 +91,20 @@ function PrincipalPagina({path}) {
         setAcciones([]);
         setMuestra404(true);
       });
+      serviciosInterval.current = setInterval(() => {
+        console.log('Llamando a intervalo');
+        axios.get(`http://127.0.0.1:8000/api/accion?p=${paginaActual}` + filtros)
+          .then(res => {
+            setTotalPaginas(res.data.total_paginas)
+            setAcciones(res.data.payload);
+            if (res.data.total_objetos === 0) setMuestra404(true);  
+          })
+          .catch((err) => {
+            console.log(err);
+            setAcciones([]);
+            setMuestra404(true);
+          });
+      }, 5000);
     }
     if (path === '/mis-objetos') {
       setTitulo('Mis objetos');
@@ -92,11 +126,63 @@ function PrincipalPagina({path}) {
       .catch(err => {
         console.log(err);
       })
+      serviciosInterval.current = setInterval(() => {
+        console.log('Llamando a intervalo');
+        axios.get(`http://127.0.0.1:8000/api/sesion/${localStorage.getItem("sesion_token")}`)
+          .then(res => {
+            let userId = res.data.payload.persona.id;
+            axios.get(`http://127.0.0.1:8000/api/misObjetos/${userId}?p=${paginaActual}` + filtros)
+              .then(res => {
+                setTotalPaginas(res.data.total_paginas)
+                setObjetos(res.data.payload);
+                if (res.data.total_objetos === 0) setMuestra404(true);  
+              })
+              .catch((err) => {
+                console.log(err);
+                setObjetos([]);
+                setMuestra404(true);
+              });
+          })
+          .catch(err => {
+            console.log(err);
+          })
+      }, 5000);
     }
     if (path == '/avisos') {
       setTitulo('Avisos');
+      axios.get(`http://127.0.0.1:8000/api/persona?alta=false`)
+        .then(res => {
+          setPersonasSinRegistrar(res.data.payload);
+        })
+        .catch(err => console.log(err));
+
+      axios.get(`http://127.0.0.1:8000/api/objeto?codigo_rfid=`)
+        .then(res => {
+          setObjetosSinRFID(res.data.payload);
+        })
+        .catch(err => console.log(err));
+      serviciosInterval.current = setInterval(() => {
+        console.log('Llamando a intervalo');
+        axios.get(`http://127.0.0.1:8000/api/persona?alta=false`)
+          .then(res => {
+            setPersonasSinRegistrar(res.data.payload);
+          })
+          .catch(err => console.log(err));
+
+        axios.get(`http://127.0.0.1:8000/api/objeto?codigo_rfid=`)
+          .then(res => {
+            setObjetosSinRFID(res.data.payload);
+          })
+          .catch(err => console.log(err));
+      }, 5000);
     }
   }, [filtros, paginaActual, flagObjetoRegistrado]);
+
+  useEffect(() => () => {
+    console.log('Desmontando Página Principal y limpiando intervalo');
+    clearInterval(serviciosInterval.current);
+    serviciosInterval.current = null;
+  }, [])
   
   return (
     <>
@@ -106,7 +192,7 @@ function PrincipalPagina({path}) {
           <Titulo titulo={titulo} />
           { (path == '/rastreo') && <Rastreo acciones={acciones} /> }
           { (path == '/objetos' || path == '/mis-objetos') && <Grid objetos={objetos} userRol={rol} nuevoObjetoRegistrado={setFlagObjetoRegistrado} /> }
-          { (path == '/avisos') && <Avisos /> }
+          { (path == '/avisos') && <Avisos personasSinRegistrar={personasSinRegistrar} objetosSinRFID={objetosSinRFID} /> }
           { (muestra404) && <ContenidoNotFound /> }
         </div>
         <div className='main-page-footer-container'>

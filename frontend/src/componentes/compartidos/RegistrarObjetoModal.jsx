@@ -13,7 +13,6 @@ function RegistrarObjetoModal({nuevoObjetoRegistrado}) {
     const numero_serie = useRef(null);
     const propietario = useRef(null);
     const localizacion = useRef(null);
-    const codigo_rfid = useRef(null);
     const estado_objeto = useRef(null);
     const imagen = useRef(null);
 
@@ -32,7 +31,6 @@ function RegistrarObjetoModal({nuevoObjetoRegistrado}) {
         numero_serie: '',
         propietario: '',
         localizacion: '',
-        codigo_rfid: '',
         imagen: null,
         estado_objeto: '',
     }]);
@@ -70,7 +68,6 @@ function RegistrarObjetoModal({nuevoObjetoRegistrado}) {
             numero_serie: (numero_serie.current.value != undefined) ? numero_serie.current.value : '',
             propietario: (propietario.current.value != undefined) ? propietario.current.value : '',
             localizacion: (localizacion.current.value != undefined) ? localizacion.current.value : '',
-            codigo_rfid: (codigo_rfid.current.value != undefined) ? codigo_rfid.current.value : '',
             estado_objeto: (estado_objeto.current.value != "0") ? estado_objeto.current.value : null,
         };
         if (imagen.current.files.length != 0){
@@ -106,10 +103,6 @@ function RegistrarObjetoModal({nuevoObjetoRegistrado}) {
                 alert(`La localización del objeto ${i+1} no puede ser un valor en blanco`);
                 return;
             }
-            if (bodyObjetos[i].codigo_rfid == '') {
-                alert(`El código RFID del objeto ${i+1} no puede ser un valor en blanco`);
-                return;
-            }
 
         }
 
@@ -136,7 +129,6 @@ function RegistrarObjetoModal({nuevoObjetoRegistrado}) {
                                 numero_serie: '',
                                 propietario: '',
                                 localizacion: '',
-                                codigo_rfid: '',
                                 imagen: null,
                                 estado_objeto: '',
                             }]);
@@ -256,15 +248,6 @@ function RegistrarObjetoModal({nuevoObjetoRegistrado}) {
                                autoComplete="off"
                                ref={localizacion}
                                value={bodyObjetos[indiceCopias].localizacion}
-                               onChange={() => actualizaBodyObjetos()} />
-                    </div>
-                    <div className='mb-3'>
-                        <label htmlFor="exampleFormControlInput1" className="form-label">Código RFID</label>
-                        <input type="email"
-                               className="form-control"
-                               autoComplete="off"
-                               ref={codigo_rfid}
-                               value={bodyObjetos[indiceCopias].codigo_rfid}
                                onChange={() => actualizaBodyObjetos()} />
                     </div>
                     <div className='mb-3'>

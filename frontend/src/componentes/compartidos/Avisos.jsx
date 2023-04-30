@@ -13,24 +13,7 @@ function parseStringToDate(string) {
 }
 
 
-function Avisos({}) {
-
-  const [personasSinRegistrar, setPersonasSinRegistrar] = useState([]);
-  const [objetosSinRFID, setObjetosSinRFID] = useState([]);
-
-  useEffect(() => {
-    axios.get(`http://127.0.0.1:8000/api/persona?alta=false`)
-      .then(res => {
-        setPersonasSinRegistrar(res.data.payload);
-      })
-      .catch(err => console.log(err));
-
-    axios.get(`http://127.0.0.1:8000/api/objeto?codigo_rfid=`)
-      .then(res => {
-        setObjetosSinRFID(res.data.payload);
-      })
-      .catch(err => console.log(err));
-  }, []);
+function Avisos({personasSinRegistrar, objetosSinRFID}) {
   
   return (
     <div className="avisos-container">

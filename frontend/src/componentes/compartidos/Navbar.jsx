@@ -1,4 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
+
+import axios from 'axios'
 
 import './Navbar.css'
 
@@ -9,6 +11,44 @@ import LogoutModal from './LogoutModal'
 
 
 function Navbar({activeLink, actualizaFiltros, nuevoObjetoRegistrado, rol}) {
+
+    const navbarInterval = useRef(null);
+    const [hayPersonasSinDarDeAlta, setHayPersonasSinDarDeAlta] = useState(false);
+    const [hayObjetosSinRFID, setHayObjetosSinRFID] = useState(false);
+
+    useEffect(() => {
+        axios.get(`http://127.0.0.1:8000/api/persona?alta=false`)
+            .then(res => {
+            (res.data.payload.length != 0) ? setHayPersonasSinDarDeAlta(true) : setHayPersonasSinDarDeAlta(false);
+            })
+            .catch(err => console.log(err));
+
+        axios.get(`http://127.0.0.1:8000/api/objeto?codigo_rfid=`)
+            .then(res => {
+            (res.data.payload.length != 0) ? setHayObjetosSinRFID(true) : setHayObjetosSinRFID(false);
+            })
+            .catch(err => console.log(err));
+        navbarInterval.current = setInterval(() => {
+            console.log('Llamando a intervalo navbar');
+            axios.get(`http://127.0.0.1:8000/api/persona?alta=false`)
+              .then(res => {
+                (res.data.payload.length != 0) ? setHayPersonasSinDarDeAlta(true) : setHayPersonasSinDarDeAlta(false);
+              })
+              .catch(err => console.log(err));
+    
+            axios.get(`http://127.0.0.1:8000/api/objeto?codigo_rfid=`)
+              .then(res => {
+                (res.data.payload.length != 0) ? setHayObjetosSinRFID(true) : setHayObjetosSinRFID(false);
+              })
+              .catch(err => console.log(err));
+          }, 5000);
+    }, [])
+
+    useEffect(() => () => {
+        console.log('Limpiando intervalo navbar');
+        clearInterval(navbarInterval.current);
+        navbarInterval.current = null;
+    }, []);
   
   return (
     <>
@@ -31,7 +71,7 @@ function Navbar({activeLink, actualizaFiltros, nuevoObjetoRegistrado, rol}) {
                         &&
                         <li className="nav-item nav-item-avisos">
                             <a className={activeLink === '/avisos' ? 'nav-link active' : 'nav-link'} href="/avisos">Avisos</a>
-                            <div className='red-circle'></div>
+                            {(hayPersonasSinDarDeAlta || hayObjetosSinRFID) && <div className='red-circle'></div>}
                         </li>
                     }
                     <li className="nav-item dropdown">
@@ -44,9 +84,13 @@ function Navbar({activeLink, actualizaFiltros, nuevoObjetoRegistrado, rol}) {
                             <li><a className="dropdown-item" href="/mis-objetos">Mis objetos</a></li>
                         </ul>
                     </li>
-                    <li className="nav-item display-on-small-devices">
-                        <a className="nav-link" data-bs-toggle="modal" data-bs-target="#filtrosModal">Filtrar</a>
-                    </li>
+                    {
+                        (activeLink != '/avisos')
+                        &&
+                        <li className="nav-item display-on-small-devices">
+                            <a className="nav-link" data-bs-toggle="modal" data-bs-target="#filtrosModal">Filtrar</a>
+                        </li>
+                    }
                     <li className="nav-item display-on-small-devices">
                         <a className="nav-link" data-bs-toggle="modal" data-bs-target="#registroObjetoModal">Registrar objeto</a>
                     </li>
@@ -55,7 +99,7 @@ function Navbar({activeLink, actualizaFiltros, nuevoObjetoRegistrado, rol}) {
                     </li>
                 </ul>
                 <div className="navbar-buttons-container">
-                    <button type="button" className="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#filtrosModal">Filtrar</button>
+                    <button type="button" className="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#filtrosModal" disabled={(activeLink == '/avisos') && true}>Filtrar</button>
                     <button type="button" className="btn btn-warning" data-bs-toggle="modal" data-bs-target="#registroObjetoModal">Registrar objeto</button>
                     <button type="button" className="btn btn-danger" data-bs-toggle="modal" data-bs-target="#logoutModal">Logout</button>
                 </div>

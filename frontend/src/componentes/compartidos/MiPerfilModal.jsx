@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 import './MiPerfilModal.css'
 
@@ -15,15 +15,11 @@ function parseStringToDate(string) {
 }
 
 
-function MiPerfilModal({userId}) {
+function MiPerfilModal({}) {
 
     const [user, setUser] = useState({})
-    const [reload, setReload] = useState(false);
-
-    const imagen = useRef(null);
 
     useEffect(() => {
-        setReload(false);
         axios.get(`http://127.0.0.1:8000/api/sesion/${localStorage.getItem("sesion_token")}`)
             .then(res => {
                 let userId = res.data.payload.persona.id;
@@ -38,42 +34,7 @@ function MiPerfilModal({userId}) {
             .catch(err => {
                 console.log(err);
             })
-    }, [reload])
-
-    const updateImagen = () => {
-        if (imagen.current.files.length == 0){
-            alert('Debe seleccionar una nueva imagen para actualizar');
-            return;
-        }
-
-        let body = {
-            imagen: imagen.current.files[0]
-        };
-
-        axios.get(`http://127.0.0.1:8000/api/sesion/${localStorage.getItem("sesion_token")}`)
-            .then(res => {
-                let userId = res.data.payload.persona.id;
-                axios.put(`http://127.0.0.1:8000/api/persona/${userId}`, body, {
-                    headers: {
-                        "Content-Type": "multipart/form-data"
-                    }
-                })
-                    .then(res => {
-                        if (res.data.ok){
-                            setReload(true);
-                        } else {
-                            alert('La imagen no pudo ser actualizada');
-                        }
-                    })
-                    .catch(err => {
-                        console.log(err);
-                        alert(err);
-                    });
-            })
-            .catch(err => {
-                console.log(err);
-            })
-    }
+    }, [])
   
   return (
     <>
@@ -89,7 +50,6 @@ function MiPerfilModal({userId}) {
                 <div className="modal-body">
                     <div className='avatar mb-3'>
                         <img src={(user.imagen != null) ? `http://127.0.0.1:8000${user.imagen}` : Imagen404} alt="Mi imagen" className="img-thumbnail" />
-                        <input className="form-control" type="file" name="imagen" accept="image/jpeg,image/png,image/jpg,image/gif" ref={imagen} />
                     </div>
                     <div className='mb-3'>
                         <label htmlFor="exampleFormControlInput1" className="form-label">Nombre</label>
@@ -122,7 +82,6 @@ function MiPerfilModal({userId}) {
                 </div>
                 <div className="modal-footer">
                     <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" className="btn btn-warning" onClick={() => updateImagen()}>Actualizar imagen</button>
                 </div>
                 </div>
             </div>
