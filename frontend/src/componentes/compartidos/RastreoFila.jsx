@@ -8,7 +8,7 @@ function capitalizeFirstLetter(string) {
 
 function parseStringToDate(string) {
   let mydate = new Date(string);
-  return `${mydate.toLocaleDateString()}  ${mydate.getHours()}:${mydate.getMinutes()}:${mydate.getSeconds()}`;
+  return `${mydate.toLocaleDateString()}  ${(mydate.getHours() > 9) ? mydate.getHours() : '0' + mydate.getHours()}:${(mydate.getMinutes() > 9) ? mydate.getMinutes() : '0' + mydate.getMinutes()}:${(mydate.getSeconds() > 9) ? mydate.getSeconds() : '0' + mydate.getSeconds()}`;
 }
 
 
