@@ -83,3 +83,30 @@ class Sesion(models.Model):
 
 	def __str__(self):
 		return self.id
+
+class SolicitudRegistro(models.Model):
+	id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True)
+	persona = models.ForeignKey(Persona, on_delete=models.CASCADE, related_name='solicitud_registro_persona', blank=True, null=True)
+	objeto = models.ForeignKey(Objeto, on_delete=models.PROTECT, related_name='solicitud_registro_objeto', blank=True, null=True)
+	tipo = models.CharField(max_length=15, blank=False, null=False)
+	batch = models.IntegerField(blank=True, null=True)
+	fecha = models.DateTimeField(default=timezone.now, blank=True, null=False)
+
+	def __str__(self):
+		return self.id
+
+class ErrorComandoDetector(models.Model):
+	id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True)
+	mensaje = models.CharField(max_length=500, blank=False, null=False)
+	fecha = models.DateTimeField(default=timezone.now, blank=True, null=False)
+
+	def __str__(self):
+		return self.id
+
+class LanzaCodigoRfid(models.Model):
+	id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True)
+	codigo = models.CharField(max_length=40, blank=False, null=False)
+	fecha = models.DateTimeField(default=timezone.now, blank=True, null=False)
+
+	def __str__(self):
+		return self.id

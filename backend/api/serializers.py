@@ -144,3 +144,43 @@ class PostSesionSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Sesion
 		fields = '__all__'
+
+class SolicitudRegistroSerializer(serializers.ModelSerializer):
+
+	class Meta:
+		model = SolicitudRegistro
+		fields = '__all__'
+
+
+class PostSolicitudRegistroSerializer(serializers.ModelSerializer):
+	persona = serializers.PrimaryKeyRelatedField(
+				queryset=Persona.objects.all(),
+				required=False
+			)
+	
+	objeto = serializers.PrimaryKeyRelatedField(
+				queryset=Objeto.objects.all(),
+				required=False
+			)
+
+	class Meta:
+		model = SolicitudRegistro
+		fields = '__all__'
+
+	def validate_tipo(self, value):
+		if value not in ['persona', 'objeto']:
+			raise serializers.ValidationError('El tipo sólo puede tener como valores: [persona, objeto]')
+		return value
+
+class ErrorComandoDetectorSerializer(serializers.ModelSerializer):
+
+	class Meta:
+		model = ErrorComandoDetector
+		fields = '__all__'
+
+
+class LanzaCodigoRfidSerializer(serializers.ModelSerializer):
+
+	class Meta:
+		model = LanzaCodigoRfid
+		fields = '__all__'

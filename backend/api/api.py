@@ -441,3 +441,117 @@ class Login(APIView):
 			return Response({"ok": True, "token": serializer.data["id"], "user_id": serializer.data["persona"]})
 		except Persona.DoesNotExist:
 			return Response({"ok": False, "errors": "No se encontró una persona con ese usuario o esa contraseña en base de datos"})
+
+
+class SolicitudRegistro_APIView(APIView):
+	parser_classes = (MultiPartParser, FormParser)
+	def get(self, request, format=None, *args, **kwargs):
+		solicitud_registro = SolicitudRegistro.objects.all()
+		solicitud_registro.order_by('fecha')
+		serializer = SolicitudRegistroSerializer(solicitud_registro, many=True)
+		return Response({"ok": True, "payload": serializer.data})
+
+	def post(self, request, format=None):
+		serializer = PostSolicitudRegistroSerializer(data=request.data)
+		if not serializer.is_valid():
+			return Response({"ok": False, "errors": serializer.errors})
+		serializer.save()
+		return Response({"ok": True, "payload": serializer.data})
+
+class SolicitudRegistro_APIView_Detail(APIView):
+	parser_classes = (MultiPartParser, FormParser)
+	def get_object(self, pk):
+		try:
+			return SolicitudRegistro.objects.get(id=pk)
+		except SolicitudRegistro.DoesNotExist:
+			return None
+
+	def get(self, request, pk, format=None):
+		solicitud_registro = self.get_object(pk)
+		if solicitud_registro == None:
+			return Response({"ok": False, "errors": "No se encontró una solicitud de registro con ese ID en base de datos"})
+		serializer = SolicitudRegistroSerializer(solicitud_registro)
+		return Response({"ok": True, "payload": serializer.data})
+
+	def delete(self, request, pk, format=None):
+		solicitud_registro = self.get_object(pk)
+		if solicitud_registro == None:
+			return Response({"ok": False, "errors": "No se encontró una solicitud de registro con ese ID en base de datos"})
+		solicitud_registro.delete()
+		return Response({"ok": True, "payload": "Solicitud de registro borrada satisfactoriamente, id: {}".format(pk)})
+	
+
+class ErrorComandoDetector_APIView(APIView):
+	parser_classes = (MultiPartParser, FormParser)
+	def get(self, request, format=None, *args, **kwargs):
+		error_comando_detector = ErrorComandoDetector.objects.all()
+		error_comando_detector.order_by('fecha')
+		serializer = ErrorComandoDetectorSerializer(error_comando_detector, many=True)
+		return Response({"ok": True, "payload": serializer.data})
+
+	def post(self, request, format=None):
+		serializer = ErrorComandoDetectorSerializer(data=request.data)
+		if not serializer.is_valid():
+			return Response({"ok": False, "errors": serializer.errors})
+		serializer.save()
+		return Response({"ok": True, "payload": serializer.data})
+
+class ErrorComandoDetector_APIView_Detail(APIView):
+	parser_classes = (MultiPartParser, FormParser)
+	def get_object(self, pk):
+		try:
+			return ErrorComandoDetector.objects.get(id=pk)
+		except ErrorComandoDetector.DoesNotExist:
+			return None
+
+	def get(self, request, pk, format=None):
+		error_comando_detector = self.get_object(pk)
+		if error_comando_detector == None:
+			return Response({"ok": False, "errors": "No se encontró un error de comando de detector con ese ID en base de datos"})
+		serializer = ErrorComandoDetectorSerializer(error_comando_detector)
+		return Response({"ok": True, "payload": serializer.data})
+
+	def delete(self, request, pk, format=None):
+		error_comando_detector = self.get_object(pk)
+		if error_comando_detector == None:
+			return Response({"ok": False, "errors": "No se encontró un error de comando de detector con ese ID en base de datos"})
+		error_comando_detector.delete()
+		return Response({"ok": True, "payload": "Error de comando de detector borrado satisfactoriamente, id: {}".format(pk)})
+	
+
+class LanzaCodigoRfid_APIView(APIView):
+	parser_classes = (MultiPartParser, FormParser)
+	def get(self, request, format=None, *args, **kwargs):
+		lanza_codigo_rfid = LanzaCodigoRfid.objects.all()
+		lanza_codigo_rfid.order_by('fecha')
+		serializer = LanzaCodigoRfidSerializer(lanza_codigo_rfid, many=True)
+		return Response({"ok": True, "payload": serializer.data})
+
+	def post(self, request, format=None):
+		serializer = LanzaCodigoRfidSerializer(data=request.data)
+		if not serializer.is_valid():
+			return Response({"ok": False, "errors": serializer.errors})
+		serializer.save()
+		return Response({"ok": True, "payload": serializer.data})
+
+class LanzaCodigoRfid_APIView_Detail(APIView):
+	parser_classes = (MultiPartParser, FormParser)
+	def get_object(self, pk):
+		try:
+			return LanzaCodigoRfid.objects.get(id=pk)
+		except LanzaCodigoRfid.DoesNotExist:
+			return None
+
+	def get(self, request, pk, format=None):
+		lanza_codigo_rfid = self.get_object(pk)
+		if lanza_codigo_rfid == None:
+			return Response({"ok": False, "errors": "No se encontró un objeto de lanzamiento de código RFID con ese ID en base de datos"})
+		serializer = LanzaCodigoRfidSerializer(lanza_codigo_rfid)
+		return Response({"ok": True, "payload": serializer.data})
+
+	def delete(self, request, pk, format=None):
+		lanza_codigo_rfid = self.get_object(pk)
+		if lanza_codigo_rfid == None:
+			return Response({"ok": False, "errors": "No se encontró un objeto de lanzamiento de código RFID con ese ID en base de datos"})
+		lanza_codigo_rfid.delete()
+		return Response({"ok": True, "payload": "Objeto de lanzamiento de código RFID borrado satisfactoriamente, id: {}".format(pk)})

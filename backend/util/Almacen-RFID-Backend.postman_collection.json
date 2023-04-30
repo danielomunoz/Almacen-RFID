@@ -33,17 +33,186 @@
 				},
 				{
 					"name": "Create Persona 1",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
 					"request": {
 						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"id\": \"a18e32e6-db09-4324-8189-3781d27a1b8c\",\r\n    \"nombre\": \"Danilo1\",\r\n    \"email\": \"danilo1@danilo.com\",\r\n    \"movil\": \"666555444\",\r\n    \"dni\": \"45555522L\",\r\n    \"codigo_rfid\": \"76464764674767\",\r\n    \"imagen\": \"https://www.images.com/danilo1\",\r\n    \"rol\": \"profesor\",\r\n    \"usuario\": \"danilo1\",\r\n    \"password\": \"danilo1\",\r\n    \"estado\": \"alta\",\r\n    \"token_sesion\": \"\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "text",
+								"disabled": true
 							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id",
+									"value": "a18e32e6-db09-4324-8189-3781d27a1b8c",
+									"type": "text"
+								},
+								{
+									"key": "nombre",
+									"value": "Danilo1",
+									"type": "text"
+								},
+								{
+									"key": "imagen",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "email",
+									"value": "danilo1@danilo.com",
+									"type": "text"
+								},
+								{
+									"key": "movil",
+									"value": "666555444",
+									"type": "text"
+								},
+								{
+									"key": "dni",
+									"value": "45557893E",
+									"type": "text"
+								},
+								{
+									"key": "codigo_rfid",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "rol",
+									"value": "profesor",
+									"type": "text"
+								},
+								{
+									"key": "usuario",
+									"value": "danilo1",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "danilo1",
+									"type": "text"
+								},
+								{
+									"key": "estado",
+									"value": "alta",
+									"type": "text"
+								},
+								{
+									"key": "token_sesion",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "alta_confirmada",
+									"value": "True",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/persona",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"persona"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Persona 1 Copy",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id",
+									"value": "a18e32e6-db09-4324-8189-3781d27a1b8c",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "nombre",
+									"value": "Danilo2",
+									"type": "text"
+								},
+								{
+									"key": "imagen",
+									"type": "file",
+									"src": "/C:/Users/danie/Pictures/+ayuno(bajar-cortisol).png"
+								},
+								{
+									"key": "email",
+									"value": "danilo3@danilo.com",
+									"type": "text"
+								},
+								{
+									"key": "movil",
+									"value": "666555444",
+									"type": "text"
+								},
+								{
+									"key": "dni",
+									"value": "45557895E",
+									"type": "text"
+								},
+								{
+									"key": "codigo_rfid",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "rol",
+									"value": "profesor",
+									"type": "text"
+								},
+								{
+									"key": "usuario",
+									"value": "dd3",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "danilo2",
+									"type": "text"
+								},
+								{
+									"key": "estado",
+									"value": "alta",
+									"type": "text"
+								},
+								{
+									"key": "token_sesion",
+									"value": "",
+									"type": "text"
+								}
+							]
 						},
 						"url": {
 							"raw": "127.0.0.1:8000/api/persona",
@@ -153,13 +322,14 @@
 						"method": "PUT",
 						"header": [],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"danilo1@danilo.com\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "alta_confirmada",
+									"value": "true",
+									"type": "text"
 								}
-							}
+							]
 						},
 						"url": {
 							"raw": "127.0.0.1:8000/api/persona/a18e32e6-db09-4324-8189-3781d27a1b8c",
@@ -201,6 +371,81 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "All Persona with alta_confirmada FALSE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:8000/api/persona?alta=true",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"persona"
+							],
+							"query": [
+								{
+									"key": "alta",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "usuario",
+									"value": "danilo1",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "danilo1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/login",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -235,13 +480,167 @@
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"id\": \"6ddab13b-bb69-456b-8095-3e3e0e00029f\",\r\n    \"nombre\": \"Objeto 1\",\r\n    \"descripcion\": \"Descripción del objeto 1\",\r\n    \"familia\": \"\",\r\n    \"categoria\": \"\",\r\n    \"subcategoria\": \"\",\r\n    \"numero_serie\": \"1\",\r\n    \"estado_en_almacen\": \"en deposito\",\r\n    \"propietario\": \"a18e32e6-db09-4324-8189-3781d27a1b8c\",\r\n    \"localizacion\": \"zona1\",\r\n    \"codigo_rfid\": \"1\",\r\n    \"imagen\": \"\",\r\n    \"estado_objeto\": \"nuevo\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id",
+									"value": "6ddab13b-bb69-456b-8095-3e3e0e00029f",
+									"type": "text"
+								},
+								{
+									"key": "nombre",
+									"value": "Objeto 1",
+									"type": "text"
+								},
+								{
+									"key": "descripcion",
+									"value": "Descripción del objeto 1",
+									"type": "text"
+								},
+								{
+									"key": "familia",
+									"value": "PLCs",
+									"type": "text"
+								},
+								{
+									"key": "categoria",
+									"value": "1200",
+									"type": "text"
+								},
+								{
+									"key": "subcategoria",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "numero_serie",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "estado_en_almacen",
+									"value": "en deposito",
+									"type": "text"
+								},
+								{
+									"key": "propietario",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "localizacion",
+									"value": "zona1",
+									"type": "text"
+								},
+								{
+									"key": "codigo_rfid",
+									"value": "111",
+									"type": "text"
+								},
+								{
+									"key": "imagen",
+									"type": "file",
+									"src": "/C:/Users/danie/Downloads/1678805093952.jpg"
+								},
+								{
+									"key": "estado_objeto",
+									"value": "nuevo",
+									"type": "text"
 								}
-							}
+							]
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/objeto",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"objeto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Objeto 1 Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id",
+									"value": "6ddab13b-bb69-456b-8095-3e3e0e00029f",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "nombre",
+									"value": "Objeto 1_1",
+									"type": "text"
+								},
+								{
+									"key": "descripcion",
+									"value": "Descripción del objeto 1_1",
+									"type": "text"
+								},
+								{
+									"key": "familia",
+									"value": "PLCs",
+									"type": "text"
+								},
+								{
+									"key": "categoria",
+									"value": "1200",
+									"type": "text"
+								},
+								{
+									"key": "subcategoria",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "numero_serie",
+									"value": "1_1",
+									"type": "text"
+								},
+								{
+									"key": "estado_en_almacen",
+									"value": "en deposito",
+									"type": "text"
+								},
+								{
+									"key": "propietario",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "localizacion",
+									"value": "zona1",
+									"type": "text"
+								},
+								{
+									"key": "codigo_rfid",
+									"value": "111_1",
+									"type": "text"
+								},
+								{
+									"key": "imagen",
+									"type": "file",
+									"src": "/C:/Users/danie/Downloads/1678805093952.jpg"
+								},
+								{
+									"key": "estado_objeto",
+									"value": "nuevo",
+									"type": "text"
+								}
+							]
 						},
 						"url": {
 							"raw": "127.0.0.1:8000/api/objeto",
@@ -267,7 +666,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": \"d8ef6526-0371-4fb1-9728-9aa9b7f6e5c4\",\r\n    \"nombre\": \"Objeto 2\",\r\n    \"descripcion\": \"Descripción del objeto 2\",\r\n    \"familia\": \"\",\r\n    \"categoria\": \"\",\r\n    \"subcategoria\": \"\",\r\n    \"numero_serie\": \"2\",\r\n    \"estado_en_almacen\": \"en deposito\",\r\n    \"propietario\": \"a18e32e6-db09-4324-8189-3781d27a1b8c\",\r\n    \"localizacion\": \"zona1\",\r\n    \"codigo_rfid\": \"2\",\r\n    \"imagen\": \"\",\r\n    \"estado_objeto\": \"nuevo\"\r\n}",
+							"raw": "{\r\n    \"id\": \"d8ef6526-0371-4fb1-9728-9aa9b7f6e5c4\",\r\n    \"nombre\": \"Objeto 2\",\r\n    \"descripcion\": \"Descripción del objeto 2\",\r\n    \"familia\": \"\",\r\n    \"categoria\": \"\",\r\n    \"subcategoria\": \"\",\r\n    \"numero_serie\": \"2\",\r\n    \"estado_en_almacen\": \"en deposito\",\r\n    \"propietario\": \"76464764674767\",\r\n    \"localizacion\": \"zona1\",\r\n    \"codigo_rfid\": \"2\",\r\n    \"imagen\": \"\",\r\n    \"estado_objeto\": \"nuevo\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -298,7 +697,317 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": \"b90f22d7-fab1-45bb-8a64-38a5edd7cd85\",\r\n    \"nombre\": \"Objeto 3\",\r\n    \"descripcion\": \"Descripción del objeto 3\",\r\n    \"familia\": \"\",\r\n    \"categoria\": \"\",\r\n    \"subcategoria\": \"\",\r\n    \"numero_serie\": \"3\",\r\n    \"estado_en_almacen\": \"en deposito\",\r\n    \"propietario\": \"a18e32e6-db09-4324-8189-3781d27a1b8c\",\r\n    \"localizacion\": \"zona1\",\r\n    \"codigo_rfid\": \"3\",\r\n    \"imagen\": \"\",\r\n    \"estado_objeto\": \"nuevo\"\r\n}",
+							"raw": "{\r\n    \"id\": \"b90f22d7-fab1-45bb-8a64-38a5edd7cd85\",\r\n    \"nombre\": \"Objeto 3\",\r\n    \"descripcion\": \"Descripción del objeto 3\",\r\n    \"familia\": \"\",\r\n    \"categoria\": \"\",\r\n    \"subcategoria\": \"\",\r\n    \"numero_serie\": \"3\",\r\n    \"estado_en_almacen\": \"en deposito\",\r\n    \"propietario\": \"76464764674767\",\r\n    \"localizacion\": \"zona1\",\r\n    \"codigo_rfid\": \"3\",\r\n    \"imagen\": \"\",\r\n    \"estado_objeto\": \"nuevo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/objeto",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"objeto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Objeto 4",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"88a58f0d-c645-4537-bc02-6ef068fe7767\",\r\n    \"nombre\": \"Objeto 4\",\r\n    \"descripcion\": \"Descripción del objeto 4\",\r\n    \"propietario\": \"76464764674768\",\r\n    \"localizacion\": \"zona1\",\r\n    \"codigo_rfid\": \"4\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/objeto",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"objeto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Objeto 5",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"e628a1d1-9500-4e5e-b480-1bcf8b57ec23\",\r\n    \"nombre\": \"Objeto 5\",\r\n    \"descripcion\": \"Descripción del objeto 5\",\r\n    \"propietario\": \"76464764674769\",\r\n    \"localizacion\": \"zona1\",\r\n    \"codigo_rfid\": \"5\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/objeto",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"objeto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Objeto 6",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"5b4b92e5-176f-4a8f-807e-4d5e51919ef5\",\r\n    \"nombre\": \"Objeto 6\",\r\n    \"descripcion\": \"Descripción del objeto 6\",\r\n    \"propietario\": \"76464764674767\",\r\n    \"localizacion\": \"zona1\",\r\n    \"codigo_rfid\": \"6\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/objeto",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"objeto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Objeto 7",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"fbe2e478-24cb-4ff5-9d13-dffee214b53f\",\r\n    \"nombre\": \"Objeto 7\",\r\n    \"descripcion\": \"Descripción del objeto 7\",\r\n    \"propietario\": \"76464764674767\",\r\n    \"localizacion\": \"zona1\",\r\n    \"codigo_rfid\": \"7\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/objeto",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"objeto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Objeto 8",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"dfdcfbd6-f8fb-4462-a7a9-5c6937515085\",\r\n    \"nombre\": \"Objeto 8\",\r\n    \"descripcion\": \"Descripción del objeto 8\",\r\n    \"propietario\": \"76464764674768\",\r\n    \"localizacion\": \"zona1\",\r\n    \"codigo_rfid\": \"8\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/objeto",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"objeto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Objeto 9",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"6a486cac-e3d1-4efb-9938-53e20361429e\",\r\n    \"nombre\": \"Objeto 9\",\r\n    \"descripcion\": \"Descripción del objeto 9\",\r\n    \"propietario\": \"76464764674768\",\r\n    \"localizacion\": \"zona1\",\r\n    \"codigo_rfid\": \"9\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/objeto",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"objeto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Objeto 10",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"22e0571c-4f32-4fa8-85c6-9a1282c4de50\",\r\n    \"nombre\": \"Objeto 10\",\r\n    \"descripcion\": \"Descripción del objeto 10\",\r\n    \"propietario\": \"76464764674769\",\r\n    \"localizacion\": \"zona1\",\r\n    \"codigo_rfid\": \"10\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/objeto",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"objeto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Objeto 11",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"33089296-c7da-497c-9439-5deffd7e0731\",\r\n    \"nombre\": \"Objeto 11\",\r\n    \"descripcion\": \"Descripción del objeto 11\",\r\n    \"propietario\": \"76464764674769\",\r\n    \"localizacion\": \"zona1\",\r\n    \"codigo_rfid\": \"11\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/objeto",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"objeto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Objeto 12",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"43573bd1-45fa-4da1-8af8-28d25de25007\",\r\n    \"nombre\": \"Objeto 12\",\r\n    \"descripcion\": \"Descripción del objeto 12\",\r\n    \"propietario\": \"76464764674767\",\r\n    \"localizacion\": \"zona1\",\r\n    \"codigo_rfid\": \"12\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/objeto",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"objeto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Objeto 13",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"0d88307f-a68a-4a19-aff4-a331f509aee1\",\r\n    \"nombre\": \"Objeto 13\",\r\n    \"descripcion\": \"Descripción del objeto 13\",\r\n    \"propietario\": \"76464764674768\",\r\n    \"localizacion\": \"zona1\",\r\n    \"codigo_rfid\": \"13\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -352,7 +1061,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"categoria\": \"herramientas\"\r\n}",
+							"raw": "{\r\n    \"responsable\": \"962a447f-17d6-4bb6-98a9-3c0b1fc407b8\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -399,6 +1108,115 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Mis Objetos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:8000/api/misObjetos/a18e32e6-db09-4324-8189-3781d27a1b8c/0",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"misObjetos",
+								"a18e32e6-db09-4324-8189-3781d27a1b8c",
+								"0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Clonar objeto By ID",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:8000/api/objeto/clonar/32f8f03a-bde3-4c07-9b84-ae16a751a739",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"objeto",
+								"clonar",
+								"32f8f03a-bde3-4c07-9b84-ae16a751a739"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All Objeto with codigo_rfid NULL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:8000/api/objeto?codigo_rfid=&nombre=1",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"objeto"
+							],
+							"query": [
+								{
+									"key": "codigo_rfid",
+									"value": ""
+								},
+								{
+									"key": "nombre",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mis Objetos with codigo_rfid NULL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:8000/api/misObjetos/a18e32e6-db09-4324-8189-3781d27a1b8c?codigo_rfid=",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"misObjetos",
+								"a18e32e6-db09-4324-8189-3781d27a1b8c"
+							],
+							"query": [
+								{
+									"key": "codigo_rfid",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -409,7 +1227,13 @@
 					"name": "All Detector",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Sesion-Token",
+								"value": "bdeba155-d9a4-4db4-a265-7c4f81eb81c4",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "127.0.0.1:8000/api/detector",
 							"host": [
@@ -433,13 +1257,24 @@
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"id\": \"70f5436d-ab30-4e0b-9bf3-ab65cb5e13c4\",\r\n    \"descripcion\": \"Detector 1\",\r\n    \"localizacion\": \"zona1\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id",
+									"value": "70f5436d-ab30-4e0b-9bf3-ab65cb5e13c4",
+									"type": "text"
+								},
+								{
+									"key": "descripcion",
+									"value": "Detector 1",
+									"type": "text"
+								},
+								{
+									"key": "localizacion",
+									"value": "zona1",
+									"type": "text"
 								}
-							}
+							]
 						},
 						"url": {
 							"raw": "127.0.0.1:8000/api/detector",
@@ -655,6 +1490,506 @@
 								"api",
 								"accion",
 								"ae29b30f-0260-41de-9767-ea8d82a16c13"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sesion",
+			"item": [
+				{
+					"name": "All Sesion",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:8000/api/sesion",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"sesion"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Sesion 1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "persona",
+									"value": "a18e32e6-db09-4324-8189-3781d27a1b8c",
+									"type": "text"
+								},
+								{
+									"key": "id",
+									"value": "28af085f-f8bd-4636-bb1a-8d182dcf5dd6",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/sesion",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"sesion"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Sesion 2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "persona",
+									"value": "a9a54fa8-5756-43ad-93ac-02fbeb49b64a",
+									"type": "text"
+								},
+								{
+									"key": "id",
+									"value": "28af085f-f8bd-4636-bb1a-8d182dcf5dd6",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/sesion",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"sesion"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Sesion By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:8000/api/sesion/28af085f-f8bd-4636-bb1a-8d182dcf5dd6",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"sesion",
+								"28af085f-f8bd-4636-bb1a-8d182dcf5dd6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Sesion By ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:8000/api/sesion/4b225c10-43c9-4206-b66f-a8393e7b1941",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"sesion",
+								"4b225c10-43c9-4206-b66f-a8393e7b1941"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SolicitudRegistro",
+			"item": [
+				{
+					"name": "All SolicitudRegistro",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:8000/api/solicitudRegistro",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"solicitudRegistro"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create SolicitudRegistro 1 (persona)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "tipo",
+									"value": "persona",
+									"type": "text"
+								},
+								{
+									"key": "persona",
+									"value": "8448a107-f703-4812-9295-f09d228c9245",
+									"type": "text"
+								},
+								{
+									"key": "batch",
+									"value": "1",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/solicitudRegistro",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"solicitudRegistro"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create SolicitudRegistro 2 (objeto)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "tipo",
+									"value": "objeto",
+									"type": "text"
+								},
+								{
+									"key": "objeto",
+									"value": "bdf80f07-3d1f-4683-8fc4-88a86acffbff",
+									"type": "text"
+								},
+								{
+									"key": "batch",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/solicitudRegistro",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"solicitudRegistro"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create SolicitudRegistro 3 (objeto)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "tipo",
+									"value": "objeto",
+									"type": "text"
+								},
+								{
+									"key": "objeto",
+									"value": "b19c8e8c-3357-436c-a690-04518671723b",
+									"type": "text"
+								},
+								{
+									"key": "batch",
+									"value": "2",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/solicitudRegistro",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"solicitudRegistro"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete SolicitudRegistro By ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:8000/api/solicitudRegistro/bd014c9a-1286-49fe-a8ba-26081ee89f04",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"solicitudRegistro",
+								"bd014c9a-1286-49fe-a8ba-26081ee89f04"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ErrorComandoDetector",
+			"item": [
+				{
+					"name": "All ErrorComandoDetector",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:8000/api/errorComandoDetector",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"errorComandoDetector"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All ErrorComandoDetector Copy",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:8000/api/errorComandoDetector/1b619a01-f552-4951-8a1d-51e56a806c67",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"errorComandoDetector",
+								"1b619a01-f552-4951-8a1d-51e56a806c67"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create ErrorComandoDetector",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "mensaje",
+									"value": "Ultra error del comando :(",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/errorComandoDetector",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"errorComandoDetector"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "LanzaCodigoRfid",
+			"item": [
+				{
+					"name": "All LanzaCodigoRfid",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:8000/api/lanzaCodigoRfid",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"lanzaCodigoRfid"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create LanzaCodigoRfid",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "codigo",
+									"value": "4444333",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/lanzaCodigoRfid",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"lanzaCodigoRfid"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All LanzaCodigoRfid",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:8000/api/lanzaCodigoRfid/ac66c4ab-60e6-46d9-96ad-04b7af8c2956",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"lanzaCodigoRfid",
+								"ac66c4ab-60e6-46d9-96ad-04b7af8c2956"
 							]
 						}
 					},

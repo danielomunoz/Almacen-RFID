@@ -13,7 +13,7 @@ media
 *.bak 
 
 # Migrations #
-*/migrations/000*
+*/migrations/00*
 
 # If you are using PyCharm # 
 # User-specific stuff
