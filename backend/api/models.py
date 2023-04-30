@@ -93,7 +93,7 @@ class SolicitudRegistro(models.Model):
 	fecha = models.DateTimeField(default=timezone.now, blank=True, null=False)
 
 	def __str__(self):
-		return self.id
+		return str(self.id)
 
 class ErrorComandoDetector(models.Model):
 	id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True)
@@ -101,7 +101,7 @@ class ErrorComandoDetector(models.Model):
 	fecha = models.DateTimeField(default=timezone.now, blank=True, null=False)
 
 	def __str__(self):
-		return self.id
+		return str(self.id)
 
 class LanzaCodigoRfid(models.Model):
 	id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True)
@@ -109,4 +109,4 @@ class LanzaCodigoRfid(models.Model):
 	fecha = models.DateTimeField(default=timezone.now, blank=True, null=False)
 
 	def __str__(self):
-		return self.id
+		return str(self.id)

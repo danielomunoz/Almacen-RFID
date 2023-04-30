@@ -64,7 +64,6 @@ class Persona_APIView_Detail(APIView):
 		persona = self.get_object(pk)
 		if persona == None:
 			return Response({"ok": False, "errors": "No se encontró una persona con ese ID en base de datos"})
-		persona.imagen.delete()
 		serializer = PersonaSerializer(persona, data=request.data)
 		if not serializer.is_valid():
 			return Response({"ok": False, "errors": serializer.errors})
