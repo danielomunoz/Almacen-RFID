@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import './ActualizaObjetoModal.css'
 
 import axios from 'axios'
@@ -17,6 +17,8 @@ function formateaEstadoObjeto(estado_objeto) {
 
 function ActualizaObjetoModal({objeto, nuevoObjetoRegistrado}) {
 
+    const [rfidObjetoNull, setRfidObjetoNull] = useState(false);
+
     const formRef = useRef(null);
 
     const nombre = useRef(null);
@@ -26,6 +28,7 @@ function ActualizaObjetoModal({objeto, nuevoObjetoRegistrado}) {
     const subcategoria = useRef(null);
     const numero_serie = useRef(null);
     const propietario = useRef(null);
+    const codigo_rfid = useRef(null);
     const localizacion = useRef(null);
     const estado_objeto = useRef(null);
     const imagen = useRef(null);
@@ -39,9 +42,12 @@ function ActualizaObjetoModal({objeto, nuevoObjetoRegistrado}) {
         (subcategoria.current.value != undefined && subcategoria.current.value != "") ? body.subcategoria = subcategoria.current.value : null;
         (numero_serie.current.value != undefined && numero_serie.current.value != "") ? body.numero_serie = numero_serie.current.value : null;
         (propietario.current.value != undefined && propietario.current.value != "") ? body.propietario = propietario.current.value : null;
+        (codigo_rfid.current.value != undefined && codigo_rfid.current.value != "") ? null : body.codigo_rfid = "delete";
         (localizacion.current.value != undefined && localizacion.current.value != "") ? body.localizacion = localizacion.current.value : null;
         (estado_objeto.current.value != "0" && estado_objeto.current.value != "") ? body.estado_objeto = estado_objeto.current.value : null;
         (imagen.current.files.length != 0 && imagen.current.value != "") ? body.imagen = imagen.current.files[0] : null;
+
+        // console.log(body);
         
         axios.put(`http://127.0.0.1:8000/api/objeto/${objeto.id}`, body, {
             headers: {
@@ -106,6 +112,13 @@ function ActualizaObjetoModal({objeto, nuevoObjetoRegistrado}) {
                             <input type="email" className="form-control" id="exampleFormControlInput1" placeholder={objeto.propietario.codigo_rfid} ref={propietario} />
                         </div>
                         <div className='mb-3'>
+                            <label htmlFor="exampleFormControlInput1" className="form-label">Código RFID del objeto</label>
+                            <div className='mb-3 d-flex'>
+                                <input type="email" className="form-control" disabled id="exampleFormControlInput1" value={(rfidObjetoNull) ? "" : (objeto.codigo_rfid != null) ? objeto.codigo_rfid : ""} ref={codigo_rfid} />
+                                <button type="button" className="btn btn-danger boton-borrado" onClick={() => setRfidObjetoNull(true)}>Borrar</button>
+                            </div>
+                        </div>
+                        <div className='mb-3'>
                             <label htmlFor="exampleFormControlInput1" className="form-label">Localización</label>
                             <input type="email" className="form-control" id="exampleFormControlInput1" placeholder={objeto.localizacion} ref={localizacion} />
                         </div>
@@ -122,7 +135,7 @@ function ActualizaObjetoModal({objeto, nuevoObjetoRegistrado}) {
                     </form>
                 </div>
                 <div className="modal-footer">
-                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={() => setTimeout(() => setRfidObjetoNull(false), 500)}>Cerrar</button>
                     <button type="button" className="btn btn-warning" data-bs-dismiss="modal" onClick={() => actualizaObjeto()}>Actualizar</button>
                 </div>
                 </div>

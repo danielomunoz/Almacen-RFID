@@ -169,6 +169,9 @@ class Objeto_APIView_Detail(APIView):
 		objeto = self.get_object(pk)
 		if objeto == None:
 			return Response({"ok": False, "errors": "No se encontró un objeto con ese ID en base de datos"})
+		request.data._mutable = True
+		if request.data["codigo_rfid"] == "delete":
+			request.data["codigo_rfid"] = None
 		serializer = PostObjetoSerializer(objeto, data=request.data)
 		if not serializer.is_valid():
 			return Response({"ok": False, "errors": serializer.errors})
