@@ -13,9 +13,10 @@ function parseStringToDate(string) {
 }
 
 
-function Avisos({activeTag, personasSinRegistrar, objetosSinRFID, nuevoObjetoRegistrado, setActiveTag}) {
+function Avisos({activeTag, personasSinRegistrar, objetosSinRFID, setActiveTag}) {
 
   const [indicePersona, setIndicePersona] = useState(0);
+  const [objetosSeleccionados, setObjetosSeleccionados] = useState([]);
   const intervalRef = useRef(null);
 
   const darDeAltaPersona = (indice) => {
@@ -65,6 +66,10 @@ function Avisos({activeTag, personasSinRegistrar, objetosSinRFID, nuevoObjetoReg
           .catch(err => console.log(err));
       })
       .catch(err => console.log(err));
+  }
+
+  const darDeAltaObjetos = () => {
+
   }
   
   return (
@@ -120,7 +125,7 @@ function Avisos({activeTag, personasSinRegistrar, objetosSinRFID, nuevoObjetoReg
                                 (personasSinRegistrar.length > 0)
                                 &&
                                 <div className="form-check">
-                                    <input className="form-check-input" type="checkbox" value="true" id="flexCheckChecked" onChange={() => console.log('jeje')} />
+                                    <input className="form-check-input" type="checkbox" value="true" id="flexCheckChecked" checked={[...Array(objetosSinRFID.length).keys()].every(i => objetosSeleccionados.includes(i))} onChange={(e) => ((e.target.checked) ? setObjetosSeleccionados([...Array(objetosSinRFID.length).keys()]) : setObjetosSeleccionados([]))} />
                                 </div>
                               }
                               Seleccionar
@@ -137,7 +142,7 @@ function Avisos({activeTag, personasSinRegistrar, objetosSinRFID, nuevoObjetoReg
                             <td>{parseStringToDate(objeto.fecha_alta)}</td>
                             <td>
                               <div className="form-check">
-                                  <input className="form-check-input" type="checkbox" value="false" id="flexCheckChecked" onChange={() => console.log('jeje')} />
+                                  <input className="form-check-input" type="checkbox" value="false" id="flexCheckChecked" checked={objetosSeleccionados.includes(indice)} onChange={(e) => ((e.target.checked) ? setObjetosSeleccionados(prevArray => [...prevArray, indice]) : setObjetosSeleccionados(objetosSeleccionados.filter(item => item != indice)))} />
                               </div>
                             </td>
                           </tr>

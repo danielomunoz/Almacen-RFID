@@ -202,7 +202,6 @@ function PrincipalPagina({path}) {
           { (path == '/avisos') && <Avisos activeTag={avisosActiveTag}
                                            personasSinRegistrar={personasSinRegistrar}
                                            objetosSinRFID={objetosSinRFID}
-                                           nuevoObjetoRegistrado={setFlagObjetoRegistrado}
                                            setActiveTag={setAvisosActiveTag} /> }
           { (muestra404) && <ContenidoNotFound /> }
         </div>
