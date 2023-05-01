@@ -57,6 +57,7 @@ function ActualizaObjetoModal({objeto, nuevoObjetoRegistrado}) {
             .then(res => {
                 if (res.data.ok){
                     alert(`Objeto actualizado satisfactoriamente`);
+                    setRfidObjetoNull(false);
                     nuevoObjetoRegistrado(true);
                     formRef.current.reset();
                 } else {

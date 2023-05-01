@@ -152,15 +152,17 @@ function PrincipalPagina({path}) {
     if (path == '/avisos') {
       setTitulo('Avisos');
       if (avisosActiveTag == 'personas'){
-        axios.get(`http://127.0.0.1:8000/api/persona?alta=false`)
+        axios.get(`http://127.0.0.1:8000/api/persona?p=${paginaActual}&alta=false`)
           .then(res => {
+            setTotalPaginas(res.data.total_paginas)
             setPersonasSinRegistrar(res.data.payload);
           })
           .catch(err => console.log(err));
       }
       if (avisosActiveTag == 'objetos'){
-        axios.get(`http://127.0.0.1:8000/api/objeto?codigo_rfid=`)
+        axios.get(`http://127.0.0.1:8000/api/objeto?p=${paginaActual}&codigo_rfid=`)
           .then(res => {
+            setTotalPaginas(res.data.total_paginas)
             setObjetosSinRFID(res.data.payload);
           })
           .catch(err => console.log(err));
@@ -168,15 +170,17 @@ function PrincipalPagina({path}) {
       serviciosInterval.current = setInterval(() => {
         // console.log('Llamando a intervalo ' + avisosActiveTag);
         if (avisosActiveTag == 'personas'){
-          axios.get(`http://127.0.0.1:8000/api/persona?alta=false`)
+          axios.get(`http://127.0.0.1:8000/api/persona?p=${paginaActual}&alta=false`)
             .then(res => {
+              setTotalPaginas(res.data.total_paginas)
               setPersonasSinRegistrar(res.data.payload);
             })
             .catch(err => console.log(err));
         }
         if (avisosActiveTag == 'objetos'){
-          axios.get(`http://127.0.0.1:8000/api/objeto?codigo_rfid=`)
+          axios.get(`http://127.0.0.1:8000/api/objeto?p=${paginaActual}&codigo_rfid=`)
             .then(res => {
+              setTotalPaginas(res.data.total_paginas)
               setObjetosSinRFID(res.data.payload);
             })
             .catch(err => console.log(err));
