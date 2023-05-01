@@ -18,7 +18,7 @@ function CartaObjeto({objeto, indice, userRol, objetoPulsado}) {
                alt="Imagen del objeto"
                className="img-thumbnail" />
         </div>
-        <div className="card-body">
+        <div className="card-body" data-bs-toggle="modal" data-bs-target="#verObjetoModal" onClick={() => objetoPulsado(indice)}>
           <p className="card-text" data-bs-toggle="modal" data-bs-target="#verObjetoModal" onClick={() => objetoPulsado(indice)}>{objeto.descripcion}</p>
           <div className="d-flex justify-content-between align-items-center">
             {
@@ -28,8 +28,7 @@ function CartaObjeto({objeto, indice, userRol, objetoPulsado}) {
                 <button type="button"
                     className="btn btn-sm btn-outline-warning"
                     data-bs-toggle="modal"
-                    data-bs-target="#verObjetoModal"
-                    onClick={() => objetoPulsado(indice)}>Ver detalle</button>
+                    data-bs-target="#verObjetoModal">Ver detalle</button>
                 <small className="text-muted">Familia: {objeto.familia}</small>
               </>
             }
@@ -40,18 +39,15 @@ function CartaObjeto({objeto, indice, userRol, objetoPulsado}) {
                 <button type="button"
                     className="btn btn-sm btn-outline-secondary"
                     data-bs-toggle="modal"
-                    data-bs-target="#replicaObjetoModal"
-                    onClick={() => objetoPulsado(indice)}>Replicar</button>
+                    data-bs-target="#replicaObjetoModal">Replicar</button>
                 <button type="button"
                     className="btn btn-sm btn-outline-primary"
                     data-bs-toggle="modal"
-                    data-bs-target="#actualizaObjetoModal"
-                    onClick={() => objetoPulsado(indice)}>Actualizar</button>
+                    data-bs-target="#actualizaObjetoModal">Actualizar</button>
                 <button type="button"
                     className="btn btn-sm btn-outline-danger"
                     data-bs-toggle="modal"
-                    data-bs-target="#borraObjetoModal"
-                    onClick={() => objetoPulsado(indice)}>Borrar</button>
+                    data-bs-target="#borraObjetoModal">Borrar</button>
               </>
             }
           </div>

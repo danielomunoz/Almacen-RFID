@@ -4,6 +4,8 @@ import axios from 'axios'
 
 import './Avisos.css'
 
+import avisosServicios from '../../servicios/Avisos.servicios'
+
 import DetalleObjetoModal from '../compartidos/DetalleObjetoModal'
 import DetallePersonaModal from '../compartidos/DetallePersonaModal'
 
@@ -68,8 +70,36 @@ function Avisos({activeTag, personasSinRegistrar, objetosSinRFID, setActiveTag})
       .catch(err => console.log(err));
   }
 
-  const darDeAltaObjetos = () => {
-
+  const darDeAltaObjetos = async () => {
+    try {
+      let hay_solicitudes_abiertas = await avisosServicios.haySolicitudesAbiertas();
+      if (hay_solicitudes_abiertas) {
+        alert('Este detector ya tiene solicitudes de registro en curso. Debes esperar a que quede libre para poder realizar tu registro');
+        return;
+      }
+      for (let i = 0; i < objetosSeleccionados.length; i++){
+        let body = {
+          tipo: 'objeto',
+          objeto: objetosSinRFID[objetosSeleccionados[i]].id
+        }
+        if (i==0) body.batch = objetosSeleccionados.length;
+        await avisosServicios.solicitudRegistroObjeto(body);
+      }
+      alert('Solicitudes de registro creadas! Esperando a que el Detector reciba los códigos RFID de los distintos objetos');
+      intervalRef.current = setInterval(async () => {
+        console.log('Comprobando registro del RFID de los objetos');
+        let hay_solicitudes_abiertas = await avisosServicios.haySolicitudesAbiertas();
+        if (!hay_solicitudes_abiertas) {
+          alert('Códigos RFID de los objetos registrados satisfactoriamente!');
+          clearInterval(intervalRef.current);
+          intervalRef.current = null;
+          setObjetosSeleccionados([]);
+          return;
+        }
+      }, 2000);
+    } catch (error) {
+      console.log(error);
+    }
   }
   
   return (
@@ -79,7 +109,7 @@ function Avisos({activeTag, personasSinRegistrar, objetosSinRFID, setActiveTag})
                 <button className="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true" onClick={() => setActiveTag('personas')}>Registro de nuevos usuarios</button>
                 <button className="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false" onClick={() => setActiveTag('objetos')}>Objetos sin código RFID asignado</button>
             </div>
-            {(activeTag == 'objetos') && <button className='btn btn-warning'>Dar de alta</button>}
+            {(activeTag == 'objetos') && <button className='btn btn-warning' onClick={() => darDeAltaObjetos()}>Dar de alta</button>}
         </nav>
         <div className="tab-content" id="nav-tabContent">
             <div className="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
