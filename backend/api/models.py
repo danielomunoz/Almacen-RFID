@@ -84,6 +84,7 @@ class Sesion(models.Model):
 	def __str__(self):
 		return self.id
 
+
 class SolicitudRegistro(models.Model):
 	id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True)
 	persona = models.ForeignKey(Persona, on_delete=models.CASCADE, related_name='solicitud_registro_persona', blank=True, null=True)
@@ -95,13 +96,6 @@ class SolicitudRegistro(models.Model):
 	def __str__(self):
 		return str(self.id)
 
-class ErrorComandoDetector(models.Model):
-	id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True)
-	mensaje = models.CharField(max_length=500, blank=False, null=False)
-	fecha = models.DateTimeField(default=timezone.now, blank=True, null=False)
-
-	def __str__(self):
-		return str(self.id)
 
 class LanzaCodigoRfid(models.Model):
 	id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True)

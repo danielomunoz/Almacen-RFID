@@ -20,8 +20,6 @@ urlpatterns = [
     path('api/login', Login.as_view()),
     path('api/solicitudRegistro', SolicitudRegistro_APIView.as_view()),
 	path('api/solicitudRegistro/<str:pk>', SolicitudRegistro_APIView_Detail.as_view()),
-    path('api/errorComandoDetector', ErrorComandoDetector_APIView.as_view()),
-	path('api/errorComandoDetector/<str:pk>', ErrorComandoDetector_APIView_Detail.as_view()),
     path('api/lanzaCodigoRfid', LanzaCodigoRfid_APIView.as_view()),
 	path('api/lanzaCodigoRfid/<str:pk>', LanzaCodigoRfid_APIView_Detail.as_view()),
 ]

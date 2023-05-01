@@ -145,12 +145,12 @@ class PostSesionSerializer(serializers.ModelSerializer):
 		model = Sesion
 		fields = '__all__'
 
+
 class SolicitudRegistroSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = SolicitudRegistro
 		fields = '__all__'
-
 
 class PostSolicitudRegistroSerializer(serializers.ModelSerializer):
 	persona = serializers.PrimaryKeyRelatedField(
@@ -171,12 +171,6 @@ class PostSolicitudRegistroSerializer(serializers.ModelSerializer):
 		if value not in ['persona', 'objeto']:
 			raise serializers.ValidationError('El tipo sólo puede tener como valores: [persona, objeto]')
 		return value
-
-class ErrorComandoDetectorSerializer(serializers.ModelSerializer):
-
-	class Meta:
-		model = ErrorComandoDetector
-		fields = '__all__'
 
 
 class LanzaCodigoRfidSerializer(serializers.ModelSerializer):

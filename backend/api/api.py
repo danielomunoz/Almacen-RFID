@@ -480,44 +480,6 @@ class SolicitudRegistro_APIView_Detail(APIView):
 		return Response({"ok": True, "payload": "Solicitud de registro borrada satisfactoriamente, id: {}".format(pk)})
 	
 
-class ErrorComandoDetector_APIView(APIView):
-	parser_classes = (MultiPartParser, FormParser)
-	def get(self, request, format=None, *args, **kwargs):
-		error_comando_detector = ErrorComandoDetector.objects.all()
-		error_comando_detector.order_by('fecha')
-		serializer = ErrorComandoDetectorSerializer(error_comando_detector, many=True)
-		return Response({"ok": True, "payload": serializer.data})
-
-	def post(self, request, format=None):
-		serializer = ErrorComandoDetectorSerializer(data=request.data)
-		if not serializer.is_valid():
-			return Response({"ok": False, "errors": serializer.errors})
-		serializer.save()
-		return Response({"ok": True, "payload": serializer.data})
-
-class ErrorComandoDetector_APIView_Detail(APIView):
-	parser_classes = (MultiPartParser, FormParser)
-	def get_object(self, pk):
-		try:
-			return ErrorComandoDetector.objects.get(id=pk)
-		except ErrorComandoDetector.DoesNotExist:
-			return None
-
-	def get(self, request, pk, format=None):
-		error_comando_detector = self.get_object(pk)
-		if error_comando_detector == None:
-			return Response({"ok": False, "errors": "No se encontró un error de comando de detector con ese ID en base de datos"})
-		serializer = ErrorComandoDetectorSerializer(error_comando_detector)
-		return Response({"ok": True, "payload": serializer.data})
-
-	def delete(self, request, pk, format=None):
-		error_comando_detector = self.get_object(pk)
-		if error_comando_detector == None:
-			return Response({"ok": False, "errors": "No se encontró un error de comando de detector con ese ID en base de datos"})
-		error_comando_detector.delete()
-		return Response({"ok": True, "payload": "Error de comando de detector borrado satisfactoriamente, id: {}".format(pk)})
-	
-
 class LanzaCodigoRfid_APIView(APIView):
 	parser_classes = (MultiPartParser, FormParser)
 	def get(self, request, format=None, *args, **kwargs):
