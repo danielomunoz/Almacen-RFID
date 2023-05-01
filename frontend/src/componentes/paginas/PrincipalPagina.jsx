@@ -26,6 +26,7 @@ function PrincipalPagina({path}) {
   const [personasSinRegistrar, setPersonasSinRegistrar] = useState([]);
   const [objetosSinRFID, setObjetosSinRFID] = useState([]);
   const serviciosInterval = useRef(null);
+  const [avisosActiveTag, setAvisosActiveTag] = useState('personas');
 
   useEffect(() => {
     axios.get(`http://127.0.0.1:8000/api/sesion/${localStorage.getItem("sesion_token")}`)
@@ -150,33 +151,39 @@ function PrincipalPagina({path}) {
     }
     if (path == '/avisos') {
       setTitulo('Avisos');
-      axios.get(`http://127.0.0.1:8000/api/persona?alta=false`)
-        .then(res => {
-          setPersonasSinRegistrar(res.data.payload);
-        })
-        .catch(err => console.log(err));
-
-      axios.get(`http://127.0.0.1:8000/api/objeto?codigo_rfid=`)
-        .then(res => {
-          setObjetosSinRFID(res.data.payload);
-        })
-        .catch(err => console.log(err));
-      serviciosInterval.current = setInterval(() => {
-        // console.log('Llamando a intervalo');
+      if (avisosActiveTag == 'personas'){
         axios.get(`http://127.0.0.1:8000/api/persona?alta=false`)
           .then(res => {
             setPersonasSinRegistrar(res.data.payload);
           })
           .catch(err => console.log(err));
-
+      }
+      if (avisosActiveTag == 'objetos'){
         axios.get(`http://127.0.0.1:8000/api/objeto?codigo_rfid=`)
           .then(res => {
             setObjetosSinRFID(res.data.payload);
           })
           .catch(err => console.log(err));
+      }
+      serviciosInterval.current = setInterval(() => {
+        // console.log('Llamando a intervalo ' + avisosActiveTag);
+        if (avisosActiveTag == 'personas'){
+          axios.get(`http://127.0.0.1:8000/api/persona?alta=false`)
+            .then(res => {
+              setPersonasSinRegistrar(res.data.payload);
+            })
+            .catch(err => console.log(err));
+        }
+        if (avisosActiveTag == 'objetos'){
+          axios.get(`http://127.0.0.1:8000/api/objeto?codigo_rfid=`)
+            .then(res => {
+              setObjetosSinRFID(res.data.payload);
+            })
+            .catch(err => console.log(err));
+        }
       }, 5000);
     }
-  }, [filtros, paginaActual, flagObjetoRegistrado]);
+  }, [filtros, paginaActual, flagObjetoRegistrado, avisosActiveTag]);
 
   useEffect(() => () => {
     // console.log('Desmontando Página Principal y limpiando intervalo');
@@ -192,7 +199,11 @@ function PrincipalPagina({path}) {
           <Titulo titulo={titulo} />
           { (path == '/rastreo') && <Rastreo acciones={acciones} /> }
           { (path == '/objetos' || path == '/mis-objetos') && <Grid objetos={objetos} userRol={rol} nuevoObjetoRegistrado={setFlagObjetoRegistrado} /> }
-          { (path == '/avisos') && <Avisos personasSinRegistrar={personasSinRegistrar} objetosSinRFID={objetosSinRFID} nuevoObjetoRegistrado={setFlagObjetoRegistrado} /> }
+          { (path == '/avisos') && <Avisos activeTag={avisosActiveTag}
+                                           personasSinRegistrar={personasSinRegistrar}
+                                           objetosSinRFID={objetosSinRFID}
+                                           nuevoObjetoRegistrado={setFlagObjetoRegistrado}
+                                           setActiveTag={setAvisosActiveTag} /> }
           { (muestra404) && <ContenidoNotFound /> }
         </div>
         <div className='main-page-footer-container'>
