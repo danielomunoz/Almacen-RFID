@@ -64,6 +64,8 @@ class Persona_APIView_Detail(APIView):
 		persona = self.get_object(pk)
 		if persona == None:
 			return Response({"ok": False, "errors": "No se encontró una persona con ese ID en base de datos"})
+		request.data._mutable = True
+		request.data["password"] = hashlib.sha256(str(request.data["password"]).encode("utf-8")).hexdigest()
 		serializer = PersonaSerializer(persona, data=request.data)
 		if not serializer.is_valid():
 			return Response({"ok": False, "errors": serializer.errors})
@@ -426,6 +428,7 @@ class Login(APIView):
 	def post(self, request, format=None):
 		try:
 			request.data._mutable = True
+			request.data["password"] = hashlib.sha256(str(request.data["password"]).encode("utf-8")).hexdigest()
 			persona = Persona.objects.get(usuario=request.data["usuario"], password=request.data["password"])
 			if (persona.alta_confirmada != True): return Response({"ok": False, "errors": "Una persona con rol de Profesor debe dar de alta tu cuenta antes de poder loguearte en la aplicación"})
 			request.data["persona"] = persona.id

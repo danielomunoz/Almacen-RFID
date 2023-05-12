@@ -12,8 +12,6 @@ function RegistroPagina() {
 
     const navigate = useNavigate();
 
-    const [titulo, setTitulo] = useState('Registro');
-
     const nombre = useRef(null);
     const email = useRef(null);
     const movil = useRef(null);
@@ -99,7 +97,7 @@ function RegistroPagina() {
   
   return (
     <div className='registro-container'>
-        <Titulo titulo={titulo} registro={true} />
+        <Titulo titulo={'Registro'} registro={true} />
         <div className='registro-form-container'>
             <form ref={formRef}>
                 <div className='avatar mb-3'>
