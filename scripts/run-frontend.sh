@@ -2,4 +2,5 @@
 
 cd ./frontend
 npm i
-npm run dev
+npm run build
+cp -r dist/* /var/www/127.0.0.1/
