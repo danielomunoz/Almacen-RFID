@@ -27,7 +27,6 @@ Vagrant.configure("2") do |config|
     # NOTE: This will enable public access to the opened port
     config.vm.network "forwarded_port", guest: 8000, host: 8000
     config.vm.network "forwarded_port", guest: 5173, host: 5173
-    config.vm.network "forwarded_port", guest: 5174, host: 5174
   
     # Create a forwarded port mapping which allows access to a specific port
     # within the machine from a port on the host machine and only allow access
@@ -85,9 +84,31 @@ Vagrant.configure("2") do |config|
       export PATH=$PATH:/opt/.local/bin
       apt-get -y install libpq-dev python-dev
       apt -y update
-      apt -y upgrade
+      # apt -y upgrade
       apt install -y curl
       curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
       apt install -y nodejs
+      apt install -y nginx
+      mkdir /var/www/127.0.0.1
+      chmod 755 -R /var/www/127.0.0.1/
+      chown -R vagrant:www-data /var/www/127.0.0.1/
+      echo 'server {' >> /etc/nginx/sites-available/127.0.0.1
+      echo '    listen 5173;' >> /etc/nginx/sites-available/127.0.0.1
+      echo '    listen [::]:5173;' >> /etc/nginx/sites-available/127.0.0.1
+      echo '' >> /etc/nginx/sites-available/127.0.0.1
+      echo '    location / {' >> /etc/nginx/sites-available/127.0.0.1
+      echo '        root /var/www/127.0.0.1;' >> /etc/nginx/sites-available/127.0.0.1
+      echo '        index index.html;' >> /etc/nginx/sites-available/127.0.0.1
+      echo '        try_files $uri /index.html;' >> /etc/nginx/sites-available/127.0.0.1
+      echo '    }' >> /etc/nginx/sites-available/127.0.0.1
+      echo '}' >> /etc/nginx/sites-available/127.0.0.1
+      nginx -t
+      unlink /etc/nginx/sites-enabled/default
+      ln -s /etc/nginx/sites-available/127.0.0.1 /etc/nginx/sites-enabled/default
+      nginx -t
+      systemctl restart nginx
+      nginx -t
+      cd /home/vagrant
+      git clone https://github.com/danielomunoz/Almacen-RFID.git
     SHELL
   end
