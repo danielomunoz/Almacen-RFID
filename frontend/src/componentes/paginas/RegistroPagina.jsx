@@ -120,7 +120,7 @@ function RegistroPagina() {
                     <input type="text" className="form-control" autoComplete="off" ref={dni} />
                 </div>
                 <div className='mb-3'>
-                        <label htmlFor="exampleFormControlInput1" className="form-label">Estado del objeto</label>
+                        <label htmlFor="exampleFormControlInput1" className="form-label">Rol del usuario</label>
                         <select className="form-select" aria-label="Default select example" ref={rol}>
                             <option value="0">Seleccione uno de los roles disponibles</option>
                             <option value="alumno">Alumno</option>
