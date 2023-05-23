@@ -61,7 +61,7 @@ class Detector(models.Model):
 	fecha_registro = models.DateTimeField(default=timezone.now, blank=True, null=False)
 
 	def __str__(self):
-		return self.id
+		return str(self.id)
 
 
 class Accion(models.Model):
@@ -73,7 +73,7 @@ class Accion(models.Model):
 	fecha = models.DateTimeField(default=timezone.now, blank=True, null=False)
 
 	def __str__(self):
-		return self.id
+		return str(self.id)
 
 
 class Sesion(models.Model):
@@ -82,7 +82,7 @@ class Sesion(models.Model):
 	fecha_expiracion = models.DateTimeField(default=(timezone.now() + datetime.timedelta(hours=2)), blank=True, null=False)
 
 	def __str__(self):
-		return self.id
+		return str(self.id)
 
 
 class SolicitudRegistro(models.Model):

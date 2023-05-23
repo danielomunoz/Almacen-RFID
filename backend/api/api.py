@@ -64,8 +64,9 @@ class Persona_APIView_Detail(APIView):
 		persona = self.get_object(pk)
 		if persona == None:
 			return Response({"ok": False, "errors": "No se encontró una persona con ese ID en base de datos"})
-		request.data._mutable = True
-		request.data["password"] = hashlib.sha256(str(request.data["password"]).encode("utf-8")).hexdigest()
+		if "password" in request.data:
+			request.data._mutable = True
+			request.data["password"] = hashlib.sha256(str(request.data["password"]).encode("utf-8")).hexdigest()
 		serializer = PersonaSerializer(persona, data=request.data)
 		if not serializer.is_valid():
 			return Response({"ok": False, "errors": serializer.errors})
@@ -171,9 +172,10 @@ class Objeto_APIView_Detail(APIView):
 		objeto = self.get_object(pk)
 		if objeto == None:
 			return Response({"ok": False, "errors": "No se encontró un objeto con ese ID en base de datos"})
-		request.data._mutable = True
-		if request.data["codigo_rfid"] == "delete":
-			request.data["codigo_rfid"] = None
+		if "codigo_rfid" in request.data:
+			request.data._mutable = True
+			if request.data["codigo_rfid"] == "delete":
+				request.data["codigo_rfid"] = None
 		serializer = PostObjetoSerializer(objeto, data=request.data)
 		if not serializer.is_valid():
 			return Response({"ok": False, "errors": serializer.errors})
