@@ -12,6 +12,7 @@ function BorraObjetoModal({objeto, nuevoObjetoRegistrado}) {
                 if (res.data.ok){
                     alert(`Objeto borrado con éxito`);           
                     nuevoObjetoRegistrado(true);
+                    location.reload();
                 } else {
                     alert(`No se pudo borrar el objeto`);
                 }
